@@ -97,20 +97,13 @@
       height:100%;
       background-color:lightgray; 
       }
-      .container{
-  position:fixed;
-  top:0px;
-  left:0px;
-  height: 100%;
-  width: 100%;
-}
-
+      
     </style>
 
     <template if="{{background}}">
       <core-image class="background" src="images/backgrounds/{{background}}" sizing="cover" preload fade></core-image>
     </template>
-    <div class="container">(
+    <div fit>
     <paper-toast id="toast" text="There was a problem loading data.">
     </paper-toast>
 
@@ -234,7 +227,6 @@
         this.blur = false;
       },
       ready: function(){
-        console.log("PASS READY");
       },
       doLogout: function(){
         this.$.logoutService.go();
