@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-a11y-keys/core-a11y-keys.html">
 <link rel="import" href="../elements/nautes-half-circle.html">
 
 <polymer-element name="nautes-bottom-section" attributes="showContent">
@@ -33,7 +34,7 @@
 
     <nautes-half-circle class="showObjects" icon="{{icon}}" on-tap="{{showObjects}}" orientation="{{showObjectsOrientation}}">
     </nautes-half-circle>
-
+    <core-a11y-keys on-keys-pressed="{{ showObjects }}" keys="2 ctrl+o"></core-a11y-keys>
     <template if="{{showContent}}">
       <div class="content-container">
         <content>

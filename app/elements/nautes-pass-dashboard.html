@@ -2,12 +2,14 @@
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-things.html">
 <link rel="import" href="../bower_components/fd-polymer-environments/fd-polymer-environments.html">
+<link rel="import" href="../bower_components/core-a11y-keys/core-a11y-keys.html">
+<link rel="import" href="../bower_components/core-tooltip/core-tooltip.html">
 
 <link rel="import" href="../elements/nautes-open-sans.html">
 <link rel="import" href="../elements/nautes-corner-button.html">
 <link rel="import" href="../elements/nautes-bottom-section.html">
 <link rel="import" href="../elements/nautes-alerts.html">
-<!-- <link rel="import" href="../elements/nautes-setup-animated-dashboard.html">  -->
+<!-- <link rel="import" href="../elements/nautes-setup-animated-dashboard.html"> -->
 <link rel="import" href="../elements/nautes-fd-info.html">
 
 <polymer-element name="nautes-pass-dashboard" attributes="background">
@@ -72,7 +74,7 @@
         position: fixed;
         top:0px;
         right: 0px;
-      }
+     } 
 
       .top-left{
         position: fixed;
@@ -112,7 +114,8 @@
     <paper-toast id="toast" text="There was a problem loading data.">
     </paper-toast>
 
-    <nautes-corner-button class="top-right"
+<core-tooltip label="Exit" class="top-right" position="left">
+    <nautes-corner-button 
       icon="exit-to-app" 
       orientation="top-right" 
       on-tap="{{doLogout}}">
@@ -121,28 +124,39 @@
            id="logoutService" fdType="users/_/logout" 
            method="POST" auto ="false"
           on-rest-response="{{gotoApp}}"></fd-rest-service>
-
+    <core-a11y-keys on-keys-pressed="{{ doLogout }}" keys="9"></core-a11y-keys>
+</core-tooltip>
+    
+<core-tooltip label="Settings" class="bottom-right" position="left">
     <nautes-corner-button class="bottom-right"
       icon="settings" 
       orientation="bottom-right" 
       on-tap="{{ showSetup }}">
     </nautes-corner-button>
+    <core-a11y-keys on-keys-pressed="{{ showSetup }}" keys="3"></core-a11y-keys>
+</core-tooltip>
 
+<core-tooltip label="Alerts" class="bottom-right" position="right">
     <nautes-corner-button class="top-left"
       icon="warning" 
       orientation="top-left" 
       on-tap="{{ showAlerts }}">
       </nautes-corner-button>
+    <core-a11y-keys on-keys-pressed="{{ showAlerts }}" keys="7"></core-a11y-keys>
+</core-tooltip>
 
+<core-tooltip label="Info" class="bottom-right" position="right">
     <nautes-corner-button class="bottom-left"
       icon="info" 
       orientation="bottom-left" 
       on-tap="{{ showInfo }}">
     </nautes-corner-button>
+    <core-a11y-keys target="{{}}" on-keys-pressed="{{ showInfo }}" keys="1 ctrl+i"></core-a11y-keys>
+</core-tooltip>
 
 <div layout vertical center self-stretch style="padding-top:10px;">
-    <fd-environments class="{{ blur ? 'blur' : ''}}" on-tap="{{hideBottomSection}}" simple showNavigation>
-    </fd-environments>
+ <fd-environments class="{{ blur ? 'blur' : ''}}" on-tap="{{hideBottomSection}}" simple showNavigation>
+    </fd-environments> 
 </div>
     <nautes-bottom-section showContent="{{ expanded }}" class="bottom-section">
       <fd-things mode="chip"></fd-things>
@@ -153,7 +167,7 @@
         <div class="close" on-tap="{{ closeSection }}">
           <core-icon icon="close"></core-icon>
         </div>
-         <nautes-setup-animated-dashboard></nautes-setup-animated-dashboard> 
+        <!--  <nautes-setup-animated-dashboard></nautes-setup-animated-dashboard>  -->
       </div>
     </template>
 
@@ -174,6 +188,7 @@
         <nautes-fd-info color="#fff"></nautes-fd-info>
       </div>
     </template>
+    <core-a11y-keys target="{{}}" on-keys-pressed="{{ closeSection }}" keys="esc"></core-a11y-keys>
  </div>
   </template>
   <script>
@@ -219,7 +234,7 @@
         this.blur = false;
       },
       ready: function(){
-
+        console.log("PASS READY");
       },
       doLogout: function(){
         this.$.logoutService.go();
