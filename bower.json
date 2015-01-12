@@ -1,6 +1,6 @@
 {
   "name": "nautes-dashboard",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "dependencies": {
     "core-elements": "Polymer/core-elements#~0.5.2",
     "paper-elements": "Polymer/paper-elements#~0.5.2",
@@ -12,7 +12,7 @@
     "fd-polymer-rest-service": "~0.1.8",
     "fd-polymer-elements": "~0.8.4",
     "fd-polymer-card": "0.3.0",
-    "fd-polymer-environments": "~0.4.6"
+    "fd-polymer-environments": "~0.5.0"
   },
   "devDependencies": {},
   "resolutions": {

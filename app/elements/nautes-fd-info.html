@@ -9,7 +9,7 @@
         display: block;
         font-family: Open Sans;
       }
-      div{
+      div {
         color: #fff;
         font-size: 1.0em;
         padding-top: 20px;
@@ -19,31 +19,37 @@
 
     <fd-rest-service fdtype="system/info/framework" fditems="{{info}}" toast="{{toast}}">
     </fd-rest-service>
-      <div layout vertical center>
-        Nautes Freedomotic Dashboard 0.0.3 (Beta)
-      </div>
-      <div layout vertical center>
-        Niko Zarzani: niko.zarzani@nautes.com<br/>
-        Matteo Mazzoni: matteo@freedomotic.com
-      </div>
-      <div layout vertical center>
-        <hr/>
-      </div>
-      <div layout vertical center>
-        Freedomotic {{info.FRAMEWORK_MAJOR}}.{{info.FRAMEWORK_MINOR}}.{{info.FRAMEWORK_BUILD}} 
-        "{{info.FRAMEWORK_VERSION_CODENAME}}" 
-        {{info.FRAMEWORK_RELEASE_DATE}}
-        ({{info.FRAMEWORK_RELEASE_TYPE}})
-      </div>
-      <div layout vertical center>
-        {{info.FRAMEWORK_AUTHOR}} : {{info.PROJECT_MAIL}}
-      </div>
-      <div layout vertical center>
-        {{'licence' | translate}}: {{info.FRAMEWORK_LICENSE}}
-      </div>
+    <fd-api-settings apiurl="{{apiurl}}" address="{{address}}"></fd-api-settings>
+    <div layout vertical center>
+      Nautes Freedomotic Dashboard 0.10 (Beta)
+    </div>
+    <div layout vertical center>
+      Niko Zarzani: niko.zarzani@nautes.com
+      <br/> Matteo Mazzoni: matteo@freedomotic.com
+    </div>
+    <div layout vertical center>
+      <hr/>
+    </div>
+    <div layout vertical center>
+      <h4>Connection params</h4>
+      API adress: {{address}} <br/>
+      
+    </div>
+    <div layout vertical center>
+      <hr/>
+    </div>
+    <div layout vertical center>
+      Freedomotic {{info.FRAMEWORK_MAJOR}}.{{info.FRAMEWORK_MINOR}}.{{info.FRAMEWORK_BUILD}} "{{info.FRAMEWORK_VERSION_CODENAME}}" {{info.FRAMEWORK_RELEASE_DATE}} ({{info.FRAMEWORK_RELEASE_TYPE}})
+    </div>
+    <div layout vertical center>
+      {{info.FRAMEWORK_AUTHOR}} : {{info.PROJECT_MAIL}}
+    </div>
+    <div layout vertical center>
+      {{'licence' | translate}}: {{info.FRAMEWORK_LICENSE}}
+    </div>
   </template>
   <script>
-    Polymer("nautes-fd-info",{
+    Polymer("nautes-fd-info", {
       info: {}
     });
   </script>

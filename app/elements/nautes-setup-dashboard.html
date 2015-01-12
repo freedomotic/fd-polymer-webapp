@@ -56,6 +56,21 @@
       <div id="smallcontainer" layout vertical align center>
 
         <nautes-box 
+          target="{{boxesObjects.plugins.title}}"  
+          box="{{boxesObjects.plugins}}" 
+          on-tap="{{boxTap}}" 
+          hero hero-id="plugins"
+          class="smallrow">
+        </nautes-box> 
+        <nautes-box 
+          target="{{boxesObjects.marketplace.title}}" 
+          box="{{boxesObjects.marketplace}}" 
+          on-tap="{{boxTap}}" 
+          hero hero-id="marketplace"
+          class="smallrow">
+        </nautes-box>
+   
+<!--        <nautes-box 
           target="{{boxesObjects.setupobjects.title}}" 
           box="{{boxesObjects.setupobjects}}" 
           on-tap="{{boxTap}}"
@@ -70,47 +85,7 @@
           hero hero-id="rooms"
           class="smallrow">
         </nautes-box>
-
-        <nautes-box 
-          target="{{boxesObjects.plugins.title}}"  
-          box="{{boxesObjects.plugins}}" 
-          on-tap="{{boxTap}}" 
-          hero hero-id="plugins"
-          class="smallrow">
-        </nautes-box> 
-
-        <nautes-box 
-          target="{{boxesObjects.triggers.title}}"  
-          box="{{boxesObjects.triggers}}" 
-          on-tap="{{boxTap}}" 
-          hero hero-id="triggers"
-          class="smallrow">
-        </nautes-box>
-
-        <nautes-box 
-          target="{{boxesObjects.roles.title}}"  
-          box="{{boxesObjects.roles}}" 
-          on-tap="{{boxTap}}" 
-          hero hero-id="roles"
-          class="smallrow">
-        </nautes-box> 
-
-        <nautes-box 
-          target="{{boxesObjects.marketplace.title}}" 
-          box="{{boxesObjects.marketplace}}" 
-          on-tap="{{boxTap}}" 
-          hero hero-id="marketplace"
-          class="smallrow">
-        </nautes-box>
         
-        <nautes-box 
-          target="{{boxesObjects.system.title}}"  
-          box="{{boxesObjects.system}}" 
-          on-tap="{{boxTap}}" 
-          hero hero-id="system"
-          class="smallrow">
-        </nautes-box>
-
         <nautes-box 
           target="{{boxesObjects.setupsettings.title}}"  
           box="{{boxesObjects.setupsettings}}" 
@@ -127,26 +102,76 @@
           class="smallrow">
         </nautes-box>
 
+-->
+        <nautes-box 
+          target="{{boxesObjects.family.title}}"  
+          box="{{boxesObjects.family}}" 
+          on-tap="{{boxTap}}" 
+          hero hero-id="family"
+          class="smallrow">
+        </nautes-box> 
+        <nautes-box 
+          target="{{boxesObjects.roles.title}}"  
+          box="{{boxesObjects.roles}}" 
+          on-tap="{{boxTap}}" 
+          hero hero-id="roles"
+          class="smallrow">
+        </nautes-box> 
+        <nautes-box 
+          target="{{boxesObjects.system.title}}"  
+          box="{{boxesObjects.system}}" 
+          on-tap="{{boxTap}}" 
+          hero hero-id="system"
+          class="smallrow">
+        </nautes-box>
+
+        <nautes-box 
+          target="{{boxesObjects.triggers.title}}"  
+          box="{{boxesObjects.triggers}}" 
+          on-tap="{{boxTap}}" 
+          hero hero-id="triggers"
+          class="smallrow">
+        </nautes-box>
+        <nautes-box 
+          target="{{boxesObjects.commands.title}}"  
+          box="{{boxesObjects.commands}}" 
+          on-tap="{{boxTap}}" 
+          hero hero-id="commands"
+          class="smallrow">
+        </nautes-box> 
+        <nautes-box 
+          target="{{boxesObjects.reactions.title}}"  
+          box="{{boxesObjects.reactions}}" 
+          on-tap="{{boxTap}}" 
+          hero hero-id="reactions"
+          class="smallrow">
+        </nautes-box>
+        
       </div>
     </template>
   
     <template if="{{!smallScreen}}">
       <div id="container" horizontal layout>
         <div class="column" flex vertical layout>
-          <nautes-box target="{{boxesObjects.setupobjects.title}}" box="{{boxesObjects.setupobjects}}" on-tap="{{boxTap}}" flex two hero hero-id="setupobjects"></nautes-box>
-          <nautes-box target="{{boxesObjects.system.title}}" box="{{boxesObjects.system}}" on-tap="{{boxTap}}" flex hero hero-id="system"></nautes-box>
-          <nautes-box target="{{boxesObjects.setupinfo.title}}"  box="{{boxesObjects.setupinfo}}" on-tap="{{boxTap}}" flex hero hero-id="setupinfo"></nautes-box>
+          <nautes-box target="{{boxesObjects.marketplace.title}}"  box="{{boxesObjects.marketplace}}" on-tap="{{boxTap}}" flex hero hero-id="marketplace"></nautes-box>
+          <nautes-box target="{{boxesObjects.plugins.title}}"  box="{{boxesObjects.plugins}}" on-tap="{{boxTap}}" flex hero hero-id="plugins"></nautes-box>
+          
+       <!-- <nautes-box target="{{boxesObjects.setupobjects.title}}" box="{{boxesObjects.setupobjects}}" on-tap="{{boxTap}}" flex two hero hero-id="setupobjects"></nautes-box> -->
+       <!-- <nautes-box target="{{boxesObjects.setupinfo.title}}"  box="{{boxesObjects.setupinfo}}" on-tap="{{boxTap}}" flex hero hero-id="setupinfo"></nautes-box> -->
         </div>
         <div class="column" flex vertical layout>
-          <nautes-box target="{{boxesObjects.rooms.title}}"  box="{{boxesObjects.rooms}}" on-tap="{{boxTap}}" flex hero hero-id="rooms"></nautes-box>
-          <nautes-box target="{{boxesObjects.plugins.title}}"  box="{{boxesObjects.plugins}}" on-tap="{{boxTap}}" flex two hero hero-id="plugins"></nautes-box>
-          <nautes-box target="{{boxesObjects.setupsettings.title}}"  box="{{boxesObjects.setupsettings}}" on-tap="{{boxTap}}" flex hero hero-id="setupsettings"></nautes-box>
-        </div>
-        <div class="column" flex vertical layout>
-          <nautes-box target="{{boxesObjects.triggers.title}}"  box="{{boxesObjects.triggers}}" on-tap="{{boxTap}}" flex hero hero-id="triggers"></nautes-box>
+          <!-- <nautes-box target="{{boxesObjects.rooms.title}}"  box="{{boxesObjects.rooms}}" on-tap="{{boxTap}}" flex hero hero-id="rooms"></nautes-box> -->
+          <!-- <nautes-box target="{{boxesObjects.setupsettings.title}}"  box="{{boxesObjects.setupsettings}}" on-tap="{{boxTap}}" flex hero hero-id="setupsettings"></nautes-box> -->
+          <nautes-box target="{{boxesObjects.family.title}}"  box="{{boxesObjects.family}}" on-tap="{{boxTap}}" flex hero hero-id="family"></nautes-box>
           <nautes-box target="{{boxesObjects.roles.title}}"  box="{{boxesObjects.roles}}" on-tap="{{boxTap}}" flex hero hero-id="roles"></nautes-box>
-          <nautes-box target="{{boxesObjects.marketplace.title}}"  box="{{boxesObjects.marketplace}}" on-tap="{{boxTap}}" flex two hero hero-id="marketplace"></nautes-box>
+          <nautes-box target="{{boxesObjects.system.title}}" box="{{boxesObjects.system}}" on-tap="{{boxTap}}" flex hero hero-id="system"></nautes-box>
         </div>
+        <div class="column" flex vertical layout>
+          <nautes-box target="{{boxesObjects.commands.title}}"  box="{{boxesObjects.commands}}" on-tap="{{boxTap}}" flex two hero hero-id="commands"></nautes-box>
+          <nautes-box target="{{boxesObjects.triggers.title}}"  box="{{boxesObjects.triggers}}" on-tap="{{boxTap}}" flex hero hero-id="triggers"></nautes-box>
+          <nautes-box target="{{boxesObjects.reactions.title}}"  box="{{boxesObjects.reactions}}" on-tap="{{boxTap}}" flex two hero hero-id="reactions"></nautes-box> 
+          
+           </div>
       </div>
     </template>
 

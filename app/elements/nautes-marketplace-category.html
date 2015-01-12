@@ -1,7 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/fd-polymer-rest-service/fd-polymer-rest-service.html">
+<link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-marketplace-package.html">
 
-<link rel="import" href="../elements/nautes-marketplace-plugin.html">
+<!-- <link rel="import" href="../elements/nautes-marketplace-plugin.html"> -->
 
 <polymer-element name="nautes-marketplace-category" attributes="category">
   <template>
@@ -10,16 +11,15 @@
         display: block;
       }
     </style>
-        <div>{{category.name}}</div>
-    <fd-rest-service id="catPlug"
-      method="GET" 
-      fdtype="marketplace/categories/{{category.name}}/plugins"  
-      fditems="{{plugins}}"
-      toast="{{toast}}">
+    <div>{{category.name}}</div>
+    <fd-rest-service id="catPlug" method="GET" fdtype="marketplace/categories/{{category.name}}/plugins" fditems="{{plugins}}" toast="{{toast}}">
     </fd-rest-service>
+    <div layout wrap horizontal>
     <template repeat="{{plugin in plugins}}">
-        <nautes-marketplace-plugin plugin="{{plugin}}"></nautes-marketplace-plugin>
+      <!-- <nautes-marketplace-plugin plugin="{{plugin}}"></nautes-marketplace-plugin> -->
+      <fd-marketplace-package package="{{plugin}}" style="padding:5px;"></fd-marketplace-package>
     </template>
+    </div>
   </template>
   <script>
     Polymer({
