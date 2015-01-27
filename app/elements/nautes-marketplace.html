@@ -11,6 +11,7 @@
       :host {
         display: block;
         font-family: Open Sans;
+        margin: 5px;
       }
       .title {
         font-family: Open Sans;
@@ -19,10 +20,8 @@
         padding: 20px;
       }
       .update {
-        padding: 5px;
         top: 0px;
         right: 0px;
-        position: absolute;
         background-color: red;
       }
       .upgrade {
@@ -31,22 +30,27 @@
         background-color: green;
       }
     </style>
+
     <fd-rest-service id="getMarketplaceCategoriesService" fdtype="marketplace/categories" fditems="{{categories}}" toast="{{toast}}">
     </fd-rest-service>
     <fd-rest-service id="updateMarketplaceData" fdtype="marketplace/update" method="POST" auto="false" toast="{{toast}}">
     </fd-rest-service>
-    <paper-fab class="update"  title="Update" icon="autorenew" on-tap="{{ updateMarketplace }}"></paper-fab>
-    <paper-fab class="upgrade" title="Upgrade" icon="cached" on-tap="{{ upgradeInstalledPlugins }}"></paper-fab>
-    <div class="title">Latest Plugins</div>
-    <div class="title">Top Charts</div>
-    <div class="title">Browse By Category</div>
-    <nautes-marketplace-categories smallQuery="max-width: 640px" toast="{{toast}}" bgColor="{{bgColor}}" selCategory="{{selCategory}}" categories="{{categories}}">
-    </nautes-marketplace-categories>
-    <div class="title">Plugin List</div>
     <div layout vertical>
-      <template repeat="{{category, index in categories}}">
-        <nautes-marketplace-category category="{{category}}"></nautes-marketplace-category>
-      </template>
+      <div layout horizontal>
+        <paper-fab class="update" title="Update" icon="autorenew" on-tap="{{ updateMarketplace }}"></paper-fab>
+        <paper-fab class="upgrade" title="Upgrade" icon="cached" on-tap="{{ upgradeInstalledPlugins }}"></paper-fab>
+      </div>
+      <!--  <div class="title">Latest Plugins</div>
+    <div class="title">Top Charts</div>
+    <div class="title">Browse By Category</div> -->
+      <nautes-marketplace-categories smallQuery="max-width: 640px" toast="{{toast}}" bgColor="{{bgColor}}" selCategory="{{selCategory}}" categories="{{categories}}">
+      </nautes-marketplace-categories>
+      <div class="title">Plugin List</div>
+      <div layout vertical>
+        <template repeat="{{category, index in categories}}">
+          <nautes-marketplace-category category="{{category}}"></nautes-marketplace-category>
+        </template>
+      </div>
     </div>
   </template>
   <script>

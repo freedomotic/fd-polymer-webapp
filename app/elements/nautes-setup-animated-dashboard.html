@@ -1,20 +1,12 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-animated-pages/core-animated-pages.html">
-<!-- <link rel="import" href="../bower_components/core-animated-pages/transitions/slide-up.html">
-<link rel="import" href="../bower_components/core-animated-pages/transitions/slide-down.html">
-<link rel="import" href="../bower_components/core-animated-pages/transitions/list-cascade.html">
-<link rel="import" href="../bower_components/core-animated-pages/transitions/tile-cascade.html">
-<link rel="import" href="../bower_components/core-animated-pages/transitions/cross-fade.html">
-<link rel="import" href="../bower_components/core-animated-pages/transitions/hero-transition.html">
-<link rel="import" href="../bower_components/core-animated-pages/transitions/hero-transition.css"> -->
 <link rel="import" href="../bower_components/flatiron-director/flatiron-director.html">
-
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-elements.html">
 <link rel="import" href="../elements/nautes-setup-dashboard.html">
 <link rel="import" href="../elements/nautes-dashboard-page.html">
 <link rel="import" href="../elements/nautes-marketplace.html">
 <link rel="import" href="../elements/nautes-reactions.html">
-<link rel="import" href="../elements/nautes-fd-info.html">
+<link rel="import" href="../elements/nautes-system.html">
 
 
 <polymer-element name="nautes-setup-animated-dashboard" attributes="selected">
@@ -61,8 +53,7 @@
 
             <section name="marketplace">
                 <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="marketplace">
-                    <nautes-marketplace bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}">
-                    </nautes-marketplace>
+                    <nautes-marketplace bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-marketplace>
                 </nautes-dashboard-page>
             </section>
             <section name="plugins" on-page-back="{{back}}">
@@ -81,17 +72,15 @@
                     <fd-roles bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" mode="chip"></fd-roles>
                 </nautes-dashboard-page>
             </section>
-            <section name="setupinfo">
+            <section name="system">
                 <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="setupinfo">
-                    <nautes-fd-info bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}">
-                    </nautes-fd-info>
+                    <nautes-system bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-system>
                 </nautes-dashboard-page>
             </section>
 
             <section name="commands" on-page-back="{{back}}">
                 <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="commands">
-                    <fd-commands mode="chip" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}">
-                    </fd-commands>
+                    <fd-commands mode="chip" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </fd-commands>
                 </nautes-dashboard-page>
             </section>
             <section name="triggers">
@@ -101,11 +90,10 @@
             </section>
             <section name="reactions">
                 <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="reactions">
-                    <nautes-reactions bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}">
-                    </nautes-reactions>
+                    <nautes-reactions bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-reactions>
                 </nautes-dashboard-page>
             </section>
-            
+
         </core-animated-pages>
 
     </template>

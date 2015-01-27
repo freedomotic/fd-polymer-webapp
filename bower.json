@@ -12,7 +12,8 @@
     "fd-polymer-rest-service": "~0.1.8",
     "fd-polymer-elements": "~0.8.4",
     "fd-polymer-card": "0.3.0",
-    "fd-polymer-environments": "~0.5.0"
+    "fd-polymer-environments": "~0.5.0",
+    "fd-polymer-ispermitted": "~0.1.2"
   },
   "devDependencies": {},
   "resolutions": {

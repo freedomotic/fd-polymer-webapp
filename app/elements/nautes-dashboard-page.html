@@ -14,8 +14,7 @@
         font-family: Open Sans;
         color: #000;
       }
-
-      #header{
+      #header {
         background: #444;
         color: #fff;
         text-transform: uppercase;
@@ -33,19 +32,22 @@
         {{selectedBox.title | translate}}
       </div>
     </div>
-    <content></content>
+    <template if="{{ isSelected(selected)}}">
+      <content></content>
+    </template>
   </template>
   <script>
-    Polymer("nautes-dashboard-page",{
+    Polymer("nautes-dashboard-page", {
 
       observe: {
-        'selected':'updatePage',
-        'boxesObjects':'updatePage'
+        'selected': 'updatePage',
+        'boxesObjects': 'updatePage'
       },
 
-      updatePage: function(){
-        if(this.selected && this.boxesObjects){
+      updatePage: function() {
+        if (this.selected && this.boxesObjects) {
           this.selectedBox = this.boxesObjects[this.selected];
+
         }
       },
 
@@ -53,13 +55,20 @@
         this.fire('page-back');
       },
 
-      selectedBoxChanged: function(){
-        if(this.selectedBox){
+      selectedBoxChanged: function() {
+        if (this.selectedBox) {
           this.style.backgroundColor = this.selectedBox.bgcolor;
           this.style.minHeight = window.innerHeight + "px";
         }
+      },
+      isSelected: function(sel){
+        if (sel === this.attributes['hero-id'].value){
+          //console.log("SEL BOX", this.selectedBox);
+          console.log("BOUND: ", sel);
+          return true;
+        }
+        return false;
       }
-
 
     });
   </script>

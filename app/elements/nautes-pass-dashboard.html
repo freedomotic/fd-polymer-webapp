@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/fd-polymer-ispermitted/fd-polymer-ispermitted.html">
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-things.html">
 <link rel="import" href="../bower_components/fd-polymer-environments/fd-polymer-environments.html">
 <link rel="import" href="../bower_components/core-a11y-keys/core-a11y-keys.html">
@@ -15,7 +16,6 @@
 <polymer-element name="nautes-pass-dashboard" attributes="background">
   <template>
     <style>
-
       :host {
         display: block;
         height: 100%;
@@ -23,12 +23,10 @@
         font-family: Open Sans;
         background-color: #dfd;
       }
-
-      .bottom-section{
+      .bottom-section {
         position: fixed;
         bottom: 0px;
       }
-
       paper-toast {
         bottom: 10px;
         left: 10px;
@@ -36,155 +34,133 @@
         padding-left: 20px;
         padding-bottom: 18px;
       }
-      
       paper-toast a {
         color: #fff;
         text-decoration: none;
       }
-
-      .blur{
+      .blur {
         -webkit-filter: blur(2px);
         -moz-filter: blur(2px);
         -o-filter: blur(2px);
         -ms-filter: blur(2px);
         filter: blur(2px);
       }
-
-      .section{
+      .section {
         position: fixed;
         overflow-y: auto;
         top: 1%;
         bottom: 1%;
         left: 1%;
         right: 1%;
-        background: rgba(50,50,50,0.95);
+        background: rgba(50, 50, 50, 0.95);
         border-radius: 4px;
         z-index: 13;
-        color:black;
+        color: black;
       }
-
-      .close{
+      .close {
         position: absolute;
         top: 5px;
         left: 5px;
         color: #fff;
       }
-
-      .top-right{
+      .top-right {
         position: fixed;
-        top:0px;
-        right: 0px;
-     } 
-
-      .top-left{
-        position: fixed;
-        top:0px;
-        left: 0px;
-      }      
-      .bottom-right{
-        position: fixed;
-        bottom:0px;
+        top: 0px;
         right: 0px;
       }
-
-      .bottom-left{
+      .top-left {
         position: fixed;
-        bottom:0px;
+        top: 0px;
         left: 0px;
       }
-      .background{
-      width:100%;
-      height:100%;
-      background-color:lightgray; 
+      .bottom-right {
+        position: fixed;
+        bottom: 0px;
+        right: 0px;
       }
-      
+      .bottom-left {
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+      }
+      .background {
+        width: 100%;
+        height: 100%;
+        background-color: lightgray;
+      }
     </style>
-
     <template if="{{background}}">
       <core-image class="background" src="images/backgrounds/{{background}}" sizing="cover" preload fade></core-image>
     </template>
     <div fit>
-    <paper-toast id="toast" text="There was a problem loading data.">
-    </paper-toast>
+      <paper-toast id="toast" text="There was a problem loading data.">
+      </paper-toast>
 
-<core-tooltip label="Exit" class="top-right" position="left">
-    <nautes-corner-button 
-      icon="exit-to-app" 
-      orientation="top-right" 
-      on-tap="{{doLogout}}">
-    </nautes-corner-button>
-    <fd-rest-service
-           id="logoutService" fdType="users/_/logout" 
-           method="POST" auto ="false"
-          on-rest-response="{{gotoApp}}"></fd-rest-service>
-    <core-a11y-keys on-keys-pressed="{{ doLogout }}" keys="9"></core-a11y-keys>
-</core-tooltip>
-    
-<core-tooltip label="Settings" class="bottom-right" position="left">
-    <nautes-corner-button class="bottom-right"
-      icon="settings" 
-      orientation="bottom-right" 
-      on-tap="{{ showSetup }}">
-    </nautes-corner-button>
-    <core-a11y-keys on-keys-pressed="{{ showSetup }}" keys="3"></core-a11y-keys>
-</core-tooltip>
+      <core-tooltip label="Exit" class="top-right" position="left">
+        <nautes-corner-button icon="exit-to-app" orientation="top-right" on-tap="{{doLogout}}">
+        </nautes-corner-button>
+        <fd-rest-service id="logoutService" fdType="users/_/logout" method="POST" auto="false" on-rest-response="{{gotoApp}}"></fd-rest-service>
+        <core-a11y-keys on-keys-pressed="{{ doLogout }}" keys="9"></core-a11y-keys>
+      </core-tooltip>
 
-<core-tooltip label="Alerts" class="bottom-right" position="right">
-    <nautes-corner-button class="top-left"
-      icon="warning" 
-      orientation="top-left" 
-      on-tap="{{ showAlerts }}">
-      </nautes-corner-button>
-    <core-a11y-keys on-keys-pressed="{{ showAlerts }}" keys="7"></core-a11y-keys>
-</core-tooltip>
-
-<core-tooltip label="Info" class="bottom-right" position="right">
-    <nautes-corner-button class="bottom-left"
-      icon="info" 
-      orientation="bottom-left" 
-      on-tap="{{ showInfo }}">
-    </nautes-corner-button>
-    <core-a11y-keys target="{{}}" on-keys-pressed="{{ showInfo }}" keys="1 ctrl+i"></core-a11y-keys>
-</core-tooltip>
-
-<div layout vertical center self-stretch style="padding-top:10px;">
- <fd-environments class="{{ blur ? 'blur' : ''}}" on-tap="{{hideBottomSection}}" simple showNavigation>
-    </fd-environments> 
-</div>
-    <nautes-bottom-section showContent="{{ expanded }}" class="bottom-section">
-      <fd-things mode="chip"></fd-things>
-    </nautes-bottom-section>
-
-    <template if="{{ displaySettings }}">
-      <div class="section">
-        <div class="close" on-tap="{{ closeSection }}">
-          <core-icon icon="close"></core-icon>
-        </div>
-        <nautes-setup-animated-dashboard></nautes-setup-animated-dashboard>
+<fd-ispermitted permission="*:read">
+        <core-tooltip label="Settings" class="bottom-right" position="left">
+        <nautes-corner-button class="bottom-right" icon="settings" orientation="bottom-right" on-tap="{{ showSetup }}">
+        </nautes-corner-button>
+        <core-a11y-keys on-keys-pressed="{{ showSetup }}" keys="3"></core-a11y-keys>
+      </core-tooltip>
+</fd-ispermitted>
+      <core-tooltip label="Alerts" class="bottom-right" position="right">
+        <nautes-corner-button class="top-left" icon="warning" orientation="top-left" on-tap="{{ showAlerts }}">
+        </nautes-corner-button>
+        <core-a11y-keys on-keys-pressed="{{ showAlerts }}" keys="7"></core-a11y-keys>
+      </core-tooltip>
+<fd-ispermitted permission="*:read">
+      <core-tooltip label="Info" class="bottom-right" position="right">
+        <nautes-corner-button class="bottom-left" icon="info" orientation="bottom-left" on-tap="{{ showInfo }}">
+        </nautes-corner-button>
+        <core-a11y-keys target="{{}}" on-keys-pressed="{{ showInfo }}" keys="1 ctrl+i"></core-a11y-keys>
+      </core-tooltip>
+</fd-ispermitted>
+      <div layout vertical center self-stretch style="padding-top:10px;">
+        <fd-environments class="{{ blur ? 'blur' : ''}}" on-tap="{{hideBottomSection}}" simple showNavigation>
+        </fd-environments>
       </div>
-    </template>
+      <nautes-bottom-section showContent="{{ expanded }}" class="bottom-section">
+        <fd-things mode="chip"></fd-things>
+      </nautes-bottom-section>
 
-    <template if="{{ displayAlerts }}">
-      <div class="section">
-        <div class="close" on-tap="{{ closeSection }}">
-          <core-icon icon="close"></core-icon>
+      <template if="{{ displaySettings }}">
+        <div class="section">
+          <div class="close" on-tap="{{ closeSection }}">
+            <core-icon icon="close"></core-icon>
+          </div>
+          <nautes-setup-animated-dashboard></nautes-setup-animated-dashboard>
         </div>
-        <nautes-alerts color="#fff"></nautes-alerts>
-      </div>
-    </template>
+      </template>
 
-  <template if="{{ displayInfo }}">
-      <div class="section">
-        <div class="close" on-tap="{{ closeSection }}">
-          <core-icon icon="close"></core-icon>
+      <template if="{{ displayAlerts }}">
+        <div class="section">
+          <div class="close" on-tap="{{ closeSection }}">
+            <core-icon icon="close"></core-icon>
+          </div>
+          <nautes-alerts color="#fff"></nautes-alerts>
         </div>
-        <nautes-fd-info color="#fff"></nautes-fd-info>
-      </div>
-    </template>
-    <core-a11y-keys target="{{}}" on-keys-pressed="{{ closeSection }}" keys="esc"></core-a11y-keys>
- </div>
+      </template>
+
+      <template if="{{ displayInfo }}">
+        <div class="section">
+          <div class="close" on-tap="{{ closeSection }}">
+            <core-icon icon="close"></core-icon>
+          </div>
+          <nautes-fd-info color="#fff"></nautes-fd-info>
+        </div>
+      </template>
+      <core-a11y-keys target="{{}}" on-keys-pressed="{{ closeSection }}" keys="esc"></core-a11y-keys>
+    </div>
   </template>
   <script>
+
     Polymer("nautes-pass-dashboard", {
 
       displaySettings: false,
@@ -192,45 +168,44 @@
       displayAlerts: false,
       blur: false,
 
-      hideBottomSection: function(){
-        if(this.expanded){
+      hideBottomSection: function() {
+        if (this.expanded) {
           this.expanded = false;
         }
       },
-      expandedChanged: function(){
+      expandedChanged: function() {
         this.blur = this.expanded;
       },
-      hideAll: function(){
+      hideAll: function() {
         this.hideBottomSection();
         this.displaySettings = false;
         this.displayAlerts = false;
         this.displayInfo = false;
       },
-      showSetup: function(){
+      showSetup: function() {
         this.hideAll();
         this.displaySettings = true;
         this.blur = !this.blur;
       },
-      showAlerts: function(){
+      showAlerts: function() {
         this.hideAll();
         this.displayAlerts = true;
         this.blur = !this.blur;
       },
-      showInfo: function(){
+      showInfo: function() {
         this.hideAll();
         this.displayInfo = true;
         this.blur = !this.blur;
       },
 
-      closeSection: function(){
+      closeSection: function() {
         this.hideAll();
         this.blur = false;
       },
-      ready: function(){
-      },
-      doLogout: function(){
+      ready: function() {},
+      doLogout: function() {
         this.$.logoutService.go();
-        this.fire("logout",null);
+        this.fire("logout", null);
       }
 
     });
