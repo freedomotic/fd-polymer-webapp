@@ -1,62 +1,33 @@
-nautes-freedomotic-dashboard
+fd-polymer-webapp
 ============================
-This is a simple WIP frontend web application that interacts with a Freedomotic 5.6.0 instance via its REST API V3.
-
-index.html -> End User functionalities
-
-setup.hmtl -> Administrator functionalities
+This is a simple frontend web application that interacts with a Freedomotic 5.6.0 instance via its REST API V3.
 
 ---
-You can access a live preview hosted on heroku: 
+You can access a live preview at: 
 
-http://nautes-dashboard.herokuapp.com/
+http://demo.freedomotic.com/
 
-Since the API instance has a self signed certificate you have to:
+* Login Params
 
-* Accept the certificate visiting:
+Address:
 
-https://fritz.bestmazzo.it:9113
-
-* Try one API from the list and login with these credentials:
+a) demo.freedomotic.com
+b) fritz.bestmazzo.it
 
 User | Pass | 
 --- | --- | 
+`guest` | `guest` |
 `admin` | `admin` | 
 
-* Now you are good to go:
+* In login panel, insert following params:
 
-http://nautes-dashboard.herokuapp.com/
-
-* Open the Settings section and set this API url:
-
-fritz.bestmazzo.it:9113/v3/
-
-* Disable SSL and enable credentials
+Address: (see above)
+Username: (see above)
+password: (see above)
+SSL: disabled
+remember me: whatever
 
 * Enjoy! :)
-
----
-* If the above API is not working try this one:
-
-http://fritz.bestmazzo.it:9111
-
-* Try one API from the list and login with these credentials:
-
-User | Pass | 
---- | --- | 
-`admin` | `admin` | 
-
-* Now you are good to go:
-
-http://nautes-dashboard.herokuapp.com/
-
-* Open the Settings section and set this API url:
-
-fritz.bestmazzo.it:9111/v3/
-
-* Disable SSL and enable credentials
-
-* ubmit and enjoy! :)
 
 =============================
 
