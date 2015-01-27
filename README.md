@@ -23,9 +23,13 @@ User | Pass |
 * In login panel, insert following params:
 
 Address: (see above)
+
 Username: (see above)
+
 password: (see above)
+
 SSL: disabled
+
 remember me: whatever
 
 * Enjoy! :)
