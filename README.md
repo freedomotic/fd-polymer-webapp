@@ -11,7 +11,8 @@ http://demo.freedomotic.com/
 
 Address:
 
-a) demo.freedomotic.com
+a) api.freedomotic.com
+
 b) fritz.bestmazzo.it
 
 User | Pass | 
