@@ -15,37 +15,42 @@
         padding-top: 20px;
         text-align: center;
       }
+      /* unvisited link */
+a:link {
+    color: #FFF;
+    text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+    color: #FFF;
+    text-decoration: none;
+}
     </style>
 
     <fd-rest-service fdtype="system/info/framework" fditems="{{info}}" toast="{{toast}}">
     </fd-rest-service>
     <fd-api-settings apiurl="{{apiurl}}" address="{{address}}"></fd-api-settings>
     <div layout vertical center>
-      Nautes Freedomotic Dashboard 0.10 (Beta)
-    </div>
-    <div layout vertical center>
-      Niko Zarzani: niko.zarzani@nautes.com
-      <br/> Matteo Mazzoni: matteo@freedomotic.com
-    </div>
-    <div layout vertical center>
+      <h4>Nautes Freedomotic Dashboard 0.1.0 (Beta)</h4>
+      <span>This is a joint work of 
+        <a target="_blank" href="http://www.freedomotic.com">Freedomotic</a> and 
+        <a target="_blank" href="http://www.nautes.com">Nautes</a> Teams
+      </span>
+      <h4>Authors</h4>
+      <span>Niko Zarzani &lt;niko.zarzani@nautes.com&gt;
+      <br/> Matteo Mazzoni &lt;matteo@freedomotic.com&gt;</span>
       <hr/>
-    </div>
-    <div layout vertical center>
       <h4>Connection params</h4>
-      API adress: {{address}} <br/>
-      
-    </div>
-    <div layout vertical center>
+      API address: {{address}} <br/>
       <hr/>
-    </div>
-    <div layout vertical center>
-      Freedomotic {{info.FRAMEWORK_MAJOR}}.{{info.FRAMEWORK_MINOR}}.{{info.FRAMEWORK_BUILD}} "{{info.FRAMEWORK_VERSION_CODENAME}}" {{info.FRAMEWORK_RELEASE_DATE}} ({{info.FRAMEWORK_RELEASE_TYPE}})
-    </div>
-    <div layout vertical center>
-      {{info.FRAMEWORK_AUTHOR}} : {{info.PROJECT_MAIL}}
-    </div>
-    <div layout vertical center>
-      {{'licence' | translate}}: {{info.FRAMEWORK_LICENSE}}
+      <h4>Freedomotic - {{'about' | translate}}</h4>
+      <span>
+        <bold>{{'release' | translate }}:</bold> 
+        {{info.FRAMEWORK_MAJOR}}.{{info.FRAMEWORK_MINOR}}.{{info.FRAMEWORK_BUILD}} "{{info.FRAMEWORK_VERSION_CODENAME}}" {{info.FRAMEWORK_RELEASE_DATE}} ({{info.FRAMEWORK_RELEASE_TYPE}})<br/>
+        <bold>{{'author' | translate}}:</bold> {{info.FRAMEWORK_AUTHOR}} &lt;{{info.PROJECT_MAIL}}&gt;<br/>
+        <bold>{{'licence' | translate}}:</bold> {{info.FRAMEWORK_LICENSE}}
+      </span>
     </div>
   </template>
   <script>

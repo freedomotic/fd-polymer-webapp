@@ -167,7 +167,7 @@ module.exports = function (grunt) {
            default: {
                     options: {},
                     files: {
-                        '<%= yeoman.dist %>/build.html': ['<%= yeoman.app %>/index.html'],
+                        '<%= yeoman.dist %>/index.html': ['<%= yeoman.app %>/index.html'],
                     }
             }
         },

@@ -104,7 +104,7 @@
         <core-a11y-keys on-keys-pressed="{{ doLogout }}" keys="9"></core-a11y-keys>
       </core-tooltip>
 
-<fd-ispermitted permission="*:read">
+<fd-ispermitted permission="*">
         <core-tooltip label="Settings" class="bottom-right" position="left">
         <nautes-corner-button class="bottom-right" icon="settings" orientation="bottom-right" on-tap="{{ showSetup }}">
         </nautes-corner-button>
@@ -116,13 +116,12 @@
         </nautes-corner-button>
         <core-a11y-keys on-keys-pressed="{{ showAlerts }}" keys="7"></core-a11y-keys>
       </core-tooltip>
-<fd-ispermitted permission="*:read">
+
       <core-tooltip label="Info" class="bottom-right" position="right">
         <nautes-corner-button class="bottom-left" icon="info" orientation="bottom-left" on-tap="{{ showInfo }}">
         </nautes-corner-button>
         <core-a11y-keys target="{{}}" on-keys-pressed="{{ showInfo }}" keys="1 ctrl+i"></core-a11y-keys>
       </core-tooltip>
-</fd-ispermitted>
       <div layout vertical center self-stretch style="padding-top:10px;">
         <fd-environments class="{{ blur ? 'blur' : ''}}" on-tap="{{hideBottomSection}}" simple showNavigation>
         </fd-environments>
