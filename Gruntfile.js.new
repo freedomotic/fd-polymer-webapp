@@ -116,7 +116,7 @@ module.exports = function (grunt) {
             }
         },
         usemin: {
-            html: ['<%= yeoman.dist %>/index.html'],
+            html: ['<%= yeoman.app %>/minified.html'],
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
             options: {
                 dirs: ['<%= yeoman.dist %>']
@@ -148,19 +148,20 @@ module.exports = function (grunt) {
                     removeEmptyAttributes: true,
                     removeOptionalTags: true*/
                 },
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.app %>',
-                    src: 'index.html',
-                    dest: '<%= yeoman.dist %>'
-                }]
+                files:  {
+                        '<%= yeoman.app %>/minified.html': ['<%= yeoman.app %>/index.html'],
+                    }
             }
         },
         vulcanize: {
            default: {
-                    options: {},
+                    options: {
+                        csp: true,
+                        inline: true,
+                        strip: false,
+                    },
                     files: {
-                        '<%= yeoman.dist %>/index.html': ['<%= yeoman.app %>/index.html'],
+                        '<%= yeoman.dist %>/index.html': ['<%= yeoman.app %>/minified.html'],
                     }
             }
         },
@@ -174,8 +175,6 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,txt}',
                         '.htaccess',
-                        'elements/**',
-                        'bower_components/**',
                         'api/**'
                     ]
                 },
@@ -223,19 +222,32 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
-        'concat',
         'imagemin',
-        'htmlmin',
+        // 'htmlmin',
+        // 'concat',
         'cssmin',
         // 'uglify',
         'copy',
-        //'vulcanize',
-        'usemin'
+        
+        'usemin',
+        'vulcanize'
     ]);
 
     grunt.registerTask('default', [
         'jshint',
         // 'test'
         'build'
+    ]);
+    grunt.registerTask('freedomotic', [
+        'clean:dist',
+        'useminPrepare',
+        'concat',
+        //'uglify',
+        'cssmin',
+        'imagemin',
+        'htmlmin',
+        'copy',
+        'usemin',
+        'vulcanize'
     ]);
 };

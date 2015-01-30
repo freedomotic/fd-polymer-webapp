@@ -9,32 +9,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild-->
+    <!-- build:css ./styles/main.css -->
+    <link rel="stylesheet" href="./styles/main.css">
+    <!-- endbuild -->
 
-    <!-- Place your HTML imports here -->
-    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-    <link href="bower_components/polymer/polymer.html" rel="import">
-
-    <link rel="import" href="bower_components/fd-polymer-i18next-translate/fd-polymer-i18next-translate.html">
-    <link rel="import" href="bower_components/core-image/core-image.html">
-    <link rel="import" href="bower_components/core-media-query/core-media-query.html">
-    <link rel="import" href="bower_components/core-a11y-keys/core-a11y-keys.html">
-    <link rel="import" href="bower_components/paper-input/paper-input.html">
-    <link rel="import" href="bower_components/paper-button/paper-button.html">
-    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
-    <link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
-    <link rel="import" href="bower_components/fd-polymer-rest-service/fd-polymer-rest-service.html">
-    <link rel="import" href="bower_components/fd-polymer-ws-service/fd-polymer-ws-service.html">
-    <link rel="import" href="elements/nautes-pass-dashboard.html">
+    <!-- build:js ./js/webcomponents.js -->
+    <script type="javascript" src="./bower_components/webcomponentsjs/webcomponents.js"></script>
+    <!-- endbuild -->
+    
+    <link rel="import" href="./bower_components/polymer/polymer.html">
+    <link rel="import" href="./bower_components/fd-polymer-i18next-translate/fd-polymer-i18next-translate.html">
+    <link rel="import" href="./bower_components/core-image/core-image.html">
+    <link rel="import" href="./bower_components/core-media-query/core-media-query.html">
+    <link rel="import" href="./bower_components/core-a11y-keys/core-a11y-keys.html">
+    <link rel="import" href="./bower_components/paper-input/paper-input.html">
+    <link rel="import" href="./bower_components/paper-button/paper-button.html">
+    <link rel="import" href="./bower_components/paper-checkbox/paper-checkbox.html">
+    <link rel="import" href="./bower_components/paper-shadow/paper-shadow.html">
+    <link rel="import" href="./bower_components/fd-polymer-rest-service/fd-polymer-rest-service.html">
+    <link rel="import" href="./bower_components/fd-polymer-ws-service/fd-polymer-ws-service.html">
+    <link rel="import" href="./elements/nautes-pass-dashboard.html">
 </head>
 
 <body unresolved>
     <template is="auto-binding">
         <fd-api-settings address="{{address}}" apiVersion="{{path}}" ssl="{{ssl}}" port="{{port}}" apiUrl="{{apiUrl}}" noSave="false"></fd-api-settings>
         <fd-rest-service id="reLogin" fdType="users/_" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}"></fd-rest-service>
-     
+
         <template if="{{!successLogin}}">
             <fd-rest-service id="doLogin" auto="false" method="POST" contentType="application/x-www-form-urlencoded" fdType="users/_/login" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}" apiUrl="{{apiUrl}}"></fd-rest-service>
             <core-media-query query="max-width: 640px" queryMatches="{{smallScreen}}"></core-media-query>
@@ -60,8 +61,8 @@
                                 <paper-checkbox id="rememberMe" checked="{{rememberMe}}" for></paper-checkbox>
                             </core-label>
                             <small style="margin:1em;" on-tap="{{toggleHideAdvanced}}">Show advanced options</small>
-                            <paper-input hidden?="{{hideAdvanced}}" label="Port" id="port" value="{{port}}" floatingLabel></paper-input>
-                            <paper-input hidden?="{{hideAdvanced}}" label="Path" id="path" value="{{path}}" floatingLabel></paper-input>
+                            <paper-input hidden="{{hideAdvanced}}" label="Port" id="port" value="{{port}}" floatingLabel></paper-input>
+                            <paper-input hidden="{{hideAdvanced}}" label="Path" id="path" value="{{path}}" floatingLabel></paper-input>
                             <paper-button raised style="margin:1em;" on-tap="{{tryLogin}}" id="loginButton">{{'login' | translate}}</paper-button>
                         </div>
                     </paper-shadow>
@@ -86,15 +87,15 @@
                         <paper-checkbox id="rememberMe" checked="{{rememberMe}}" for></paper-checkbox>
                     </core-label>
                     <small style="margin:1em;" on-tap="{{toggleHideAdvanced}}">Show advanced options</small>
-                    <paper-input hidden?="{{hideAdvanced}}" label="Port" id="port" value="{{port}}" floatingLabel></paper-input>
-                    <paper-input hidden?="{{hideAdvanced}}" label="Path" id="path" value="{{path}}" floatingLabel></paper-input>
+                    <paper-input hidden="{{hideAdvanced}}" label="Port" id="port" value="{{port}}" floatingLabel></paper-input>
+                    <paper-input hidden="{{hideAdvanced}}" label="Path" id="path" value="{{path}}" floatingLabel></paper-input>
                     <paper-button raised style="margin:1em;" on-tap="{{tryLogin}}" id="loginButton">{{'login' | translate}}</paper-button>
                 </div>
             </template>
         </template>
         <template if="{{successLogin}}">
             <fd-rest-service id="prelogout" auto="false" method="POST" fdType="users/_/logout" on-rest-response="{{backToLogin}}"></fd-rest-service>
-         
+
             <nautes-pass-dashboard background="{{background}}" on-logout="{{backToLogin}}"></nautes-pass-dashboard>
 
         </template>
