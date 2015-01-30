@@ -1,10 +1,10 @@
 {
-  "name": "nautes-dashboard",
-  "version": "0.2.1",
+  "name": "freedomotic-polymer-webapp",
+  "version": "0.1.0",
   "dependencies": {
-    "core-elements": "Polymer/core-elements#~0.5.2",
-    "paper-elements": "Polymer/paper-elements#~0.5.2",
-    "polymer": "Polymer/polymer#~0.5.2",
+    "core-elements": "Polymer/core-elements#^0.5.2",
+    "paper-elements": "Polymer/paper-elements#^0.5.2",
+    "polymer": "Polymer/polymer#^0.5.2",
     "flatiron-director": "https://github.com/PolymerLabs/flatiron-director.git#~0.3.0",
     "x-websocket": "~0.2.0",
     "google-chart": "~0.0.1",
@@ -12,7 +12,7 @@
     "fd-polymer-rest-service": "^0.2.2",
     "fd-polymer-elements": "^0.9.0",
     "fd-polymer-card": "0.4.0",
-    "fd-polymer-environments": "~0.5.0",
+    "fd-polymer-environments": "^0.5.9",
     "fd-polymer-ispermitted": "0.1.4",
     "fd-polymer-i18next-translate": "^0.2.2"
   },
@@ -21,10 +21,9 @@
     "core-ajax": "~0.5.2",
     "polymer": "~0.5.2",
     "core-shared-lib": "^0.5.2",
-    "platform": "~0.3.1",
     "fd-polymer-card": "0.4.0",
     "fd-polymer-api-settings": "~0.2.0",
-    "core-component-page": "^0.5",
-    "fd-polymer-i18next-translate": "0.2.2"
+    "fd-polymer-i18next-translate": "0.2.2",
+    "platform": "~0.3.1"
   }
 }
