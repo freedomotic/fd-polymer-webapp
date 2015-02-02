@@ -16,12 +16,11 @@ body {
 	position:fixed;
 	top:50%;
 	left:50%;
-	margin-left: -150px;
+	margin-left: -200px;
 	margin-top: -250px;
 }
 .login{
-	min-width: 400px ;
-	max-width: 100%;
+	width: 400px ;
 	background-color: rgba(255,255,255,0.9);
 	color: black;
 }
@@ -38,25 +37,4 @@ body {
 .logocontainer{
  	padding:10px;
 	background-color: #555;
-}
-
-core-icon-button {
--moz-user-select: none;
-border-radius: 2px;
-box-sizing: border-box;
-cursor: pointer;
-display: inline-block;
-font-size: 1rem;
-margin: 2px;
-padding: 7px;
-vertical-align: middle;
-}
-html core-icon {
-background-repeat: no-repeat;
-display: inline-block;
-fill: currentcolor;
-height: 24px;
-position: relative;
-vertical-align: middle;
-width: 24px;
 }

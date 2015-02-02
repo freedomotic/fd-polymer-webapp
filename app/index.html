@@ -16,7 +16,7 @@
     <!-- build:js ./js/webcomponents.js -->
     <script type="javascript" src="./bower_components/webcomponentsjs/webcomponents.js"></script>
     <!-- endbuild -->
-    
+
     <link rel="import" href="./bower_components/polymer/polymer.html">
     <link rel="import" href="./bower_components/fd-polymer-i18next-translate/fd-polymer-i18next-translate.html">
     <link rel="import" href="./bower_components/core-image/core-image.html">
@@ -33,65 +33,62 @@
 
 <body unresolved>
     <template is="auto-binding">
+        <template id="loginContent">
+            <div class="logocontainer" self-stretch>
+                <core-image class="logo" src="images/freedomotic-logo-light-transparent.png" sizing="contain" preload fade></core-image>
+            </div>
+            <div layout vertical self-stretch end-justified style="padding:1em 2em;">
+                <template if="{{!config.address}}">
+                    <paper-input-decorator id="addressInput" label="{{'address' | translate}}" floatingLabel error="Invalid Address">
+                        <input is="core-input" id="address" value="{{address}}"/>
+                    </paper-input-decorator>
+
+                </template>
+                <paper-input id="name" label="{{'name' | translate}}" value="{{name}}" floatingLabel></paper-input>
+                <paper-input-decorator id="passwordInput" label="{{'password' | translate}}" floatingLabel error="{{'incorrect_login_msg' | translate }}">
+                    <input id="password" is="core-input" value="{{password}}" name="password" type="password" />
+                </paper-input-decorator>
+                <template if="{{config.ssl == undefined}}">
+                    <core-label center horizontal layout style="margin:1em;">
+                        <div flex>SSL</div>&nbsp;
+                        <paper-checkbox checked="{{ssl}}" for></paper-checkbox>
+                    </core-label>
+                </template>
+                <core-label center horizontal layout style="margin:1em;">
+                    <div flex>Remember me</div>&nbsp;
+                    <paper-checkbox id="rememberMe" checked="{{rememberMe}}" for></paper-checkbox>
+                </core-label>
+                <template if="{{!config.port || !config.path}}">
+                    <small style="margin:1em;" on-tap="{{toggleHideAdvanced}}">Show advanced options</small>
+                </template>
+                <template if="{{!hideAdvanced}}">
+                    <template if="{{!config.port}}">
+                        <paper-input label="Port" id="port" value="{{port}}" floatingLabel></paper-input>
+                    </template>
+                    <template if="{{!config.path}}">
+                        <paper-input label="Path" id="path" value="{{path}}" floatingLabel></paper-input>
+                    </template>
+                </template>
+                <paper-button raised style="margin:1em;" on-tap="{{tryLogin}}" id="loginButton">{{'login' | translate}}</paper-button>
+            </div>
+        </template>
+        <core-ajax id="config" auto url="./config.json" handleAs="json" on-core-response="{{configChanged}}" dsdsdresponse="{{config}}"></core-ajax>
+
         <fd-api-settings address="{{address}}" apiVersion="{{path}}" ssl="{{ssl}}" port="{{port}}" apiUrl="{{apiUrl}}" noSave="false"></fd-api-settings>
         <fd-rest-service id="reLogin" fdType="users/_" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}"></fd-rest-service>
 
         <template if="{{!successLogin}}">
             <fd-rest-service id="doLogin" auto="false" method="POST" contentType="application/x-www-form-urlencoded" fdType="users/_/login" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}" apiUrl="{{apiUrl}}"></fd-rest-service>
-            <core-media-query query="max-width: 640px" queryMatches="{{smallScreen}}"></core-media-query>
+            <core-media-query query="max-width: 480px" queryMatches="{{smallScreen}}"></core-media-query>
             <template if="{{!smallScreen}}">
                 <core-image class="background" src="images/backgrounds/{{background}}" sizing="cover" preload fade></core-image>
                 <div layout horizontal center class="container">
                     <paper-shadow z="2" class="login" layout vertical center self-center>
-                        <div class="logocontainer" self-stretch>
-                            <core-image class="logo" src="images/freedomotic-logo-light-transparent.png" sizing="contain" preload fade></core-image>
-                        </div>
-                        <div layout vertical self-stretch end-justified style="padding:1em 2em;">
-                            <paper-input label="{{'address' | translate}}" id="address" value="{{address}}" floatingLabel></paper-input>
-                            <paper-input id="name" label="{{'name' | translate}}" value="{{name}}" floatingLabel></paper-input>
-                            <paper-input-decorator label="{{'password' | translate}}" floatingLabel>
-                                <input id="password" is="core-input" value="{{password}}" name="password" type="password" />
-                            </paper-input-decorator>
-                            <core-label center horizontal layout style="margin:1em;">
-                                <div flex>SSL</div>&nbsp;
-                                <paper-checkbox checked="{{ssl}}" for></paper-checkbox>
-                            </core-label>
-                            <core-label center horizontal layout style="margin:1em;">
-                                <div flex>Remember me</div>&nbsp;
-                                <paper-checkbox id="rememberMe" checked="{{rememberMe}}" for></paper-checkbox>
-                            </core-label>
-                            <small style="margin:1em;" on-tap="{{toggleHideAdvanced}}">Show advanced options</small>
-                            <paper-input hidden="{{hideAdvanced}}" label="Port" id="port" value="{{port}}" floatingLabel></paper-input>
-                            <paper-input hidden="{{hideAdvanced}}" label="Path" id="path" value="{{path}}" floatingLabel></paper-input>
-                            <paper-button raised style="margin:1em;" on-tap="{{tryLogin}}" id="loginButton">{{'login' | translate}}</paper-button>
-                        </div>
+                        <template ref="loginContent" bind></template>
                     </paper-shadow>
                 </div>
             </template>
-            <template if="{{smallScreen}}">
-                <div class="logocontainer" self-stretch>
-                    <core-image class="logo" src="images/freedomotic-logo-light-transparent.png" sizing="contain" preload fade></core-image>
-                </div>
-                <div layout vertical self-stretch end-justified style="padding:1em 2em;">
-                    <paper-input label="{{'address' | translate}}" id="address" value="{{address}}" floatingLabel></paper-input>
-                    <paper-input id="name" label="{{'name' | translate}}" value="{{name}}" floatingLabel></paper-input>
-                    <paper-input-decorator label="{{'password' | translate}}" floatingLabel>
-                        <input id="password" is="core-input" value="{{password}}" name="password" type="password" />
-                    </paper-input-decorator>
-                    <core-label center horizontal layout style="margin:1em;">
-                        <div flex>SSL</div>&nbsp;
-                        <paper-checkbox checked="{{ssl}}" for></paper-checkbox>
-                    </core-label>
-                    <core-label center horizontal layout style="margin:1em;">
-                        <div flex>Remember me</div>&nbsp;
-                        <paper-checkbox id="rememberMe" checked="{{rememberMe}}" for></paper-checkbox>
-                    </core-label>
-                    <small style="margin:1em;" on-tap="{{toggleHideAdvanced}}">Show advanced options</small>
-                    <paper-input hidden="{{hideAdvanced}}" label="Port" id="port" value="{{port}}" floatingLabel></paper-input>
-                    <paper-input hidden="{{hideAdvanced}}" label="Path" id="path" value="{{path}}" floatingLabel></paper-input>
-                    <paper-button raised style="margin:1em;" on-tap="{{tryLogin}}" id="loginButton">{{'login' | translate}}</paper-button>
-                </div>
-            </template>
+            <template if="{{smallScreen}}" ref="loginContent"></template>
         </template>
         <template if="{{successLogin}}">
             <fd-rest-service id="prelogout" auto="false" method="POST" fdType="users/_/logout" on-rest-response="{{backToLogin}}"></fd-rest-service>
@@ -111,32 +108,46 @@
         ];
         scope.background = scope.backgrounds[Math.floor((Math.random() * 10))];
         scope.backToLogin = function(e) {
-            console.log(e);
-            console.log("BACK TO LOGIN");
+            console.log("BACK TO LOGIN", e);
             scope.successLogin = false;
 
+            if (e.detail.detail.xhr.status == 0) {
+                var address = document.querySelector('#addressInput');
+                if (address) {
+                    address.isInvalid = true;
+                }
+            } else {
+                var password = document.querySelector('#passwordInput');
+                if (password) {
+                    password.isInvalid = true;
+                }
+            }
             // block login button fo 3 seconds
             var loginButton = document.querySelector('#loginButton');
-            loginButton.disabled = true;
+            if (loginButton) {
+                loginButton.disabled = true;
+            }
 
             // cleanup password field
             var password = document.querySelector('#password');
-            console.log(password);
-            password.value = "";
-
-            setTimeout(function() {
-                var loginButton = document.querySelector('#loginButton');
-                loginButton.disabled = false;
-            }, 5000);
+            if (password) {
+                //console.log(password);
+                password.value = "";
+            }
+            if (loginButton) {
+                setTimeout(function() {
+                    var loginButton = document.querySelector('#loginButton');
+                    loginButton.disabled = false;
+                }, 5000);
+            }
         };
         scope.gotoApp = function(e) {
             //console.log("APPARENTLY IT'S A SUCCESSFUL RESPONSE")
-            if (false && e.detail.detail.xhr.status == 0) {
+            if (e.detail.detail.xhr.status == 0) {
                 scope.backToLogin(e);
             }
             else {
-                console.log(e);
-                console.log("LOGIN SUCCESS");
+                console.log("LOGIN SUCCESS", e);
                 scope.successLogin = true;
             }
         };
@@ -144,7 +155,14 @@
         scope.toggleHideAdvanced = function() {
             scope.hideAdvanced = !scope.hideAdvanced;
         };
+        scope.resetValidity = function() {
+            var address = document.querySelector('#addressInput');
+            address.isInvalid = false;
+            var password = document.querySelector('#passwordInput');
+            password.isInvalid = false;
+        }
         scope.tryLogin = function() {
+            scope.resetValidity();
             // find userAPI
             var api = document.querySelector('#doLogin');
             api.body = "name=" + scope.name + "&password=" + scope.password + "&rememberMe=" + scope.rememberMe + "&";
@@ -154,9 +172,17 @@
             var api = document.querySelector('#prelogout');
             api.go();
         };
+        scope.configChanged = function(response) {
+            scope.config = response.detail.response;
+            console.log("CONFIG", scope.config);
+
+            scope.address = (!!scope.config.address) ? scope.config.address : scope.address;
+            scope.port = (!!scope.config.port) ? scope.config.port : scope.port;
+            scope.path = (!!scope.config.path) ? scope.config.path : scope.path;
+            scope.ssl = (scope.config.ssl != undefined) ? scope.config.ssl : scope.ssl;
+        };
         document.addEventListener('rest-error', function(e) {
-            console.log("ERROR ON A REST CALL");
-            console.log(e);
+            console.log("ERROR ON A REST CALL", e);
             if (e.detail.detail.xhr.status == 401) {
                 scope.backToLogin(e);
             }
