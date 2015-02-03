@@ -24,6 +24,7 @@
     "fd-polymer-card": "0.4.0",
     "fd-polymer-api-settings": "~0.2.0",
     "fd-polymer-i18next-translate": "0.2.2",
-    "platform": "~0.3.1"
+    "platform": "~0.3.1",
+    "core-component-page": "^0.5"
   }
 }

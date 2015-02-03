@@ -1,5 +1,5 @@
 {
-    "_help_": "Toggle underscore from params, and change their value to force them"
+    "_help_": "Toggle underscore from params, and change their value to force them",
     "_address": "localhost", 
     "_port": "9111",
     "_path": "v3",

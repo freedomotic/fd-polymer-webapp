@@ -176,7 +176,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'elements/**',
                         'bower_components/**',
-                        'api/**'
+                        'api/**',
+                        'config.json'
                     ]
                 },
                 {
