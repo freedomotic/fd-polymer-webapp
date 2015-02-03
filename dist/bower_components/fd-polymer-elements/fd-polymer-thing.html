@@ -1,0 +1,159 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../fd-polymer-rest-service/fd-polymer-rest-service.html">
+<link rel="import" href="../fd-polymer-ws-service/fd-polymer-ws-service.html">
+<link rel="import" href="../fd-polymer-api-settings/fd-polymer-api-settings.html">
+<link rel="import" href="../fd-polymer-i18next-translate/fd-polymer-i18next-translate.html">
+<link rel="import" href="../paper-shadow/paper-shadow.html">
+<link rel="import" href="../paper-slider/paper-slider.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../fd-polymer-generics/fd-generic-item.html">
+<link rel="import" href="../fd-polymer-ispermitted/fd-polymer-ispermitted.html">
+<!--
+Element providing proof of concept of a Thing card, with all needed features
+
+##### Example
+
+    <fd-thing  address="fritz.bestmazzo.it" port="9111" apiVersion="v3" 
+          thingUuid="76fd619c-617b-4fb7-9870-8f08164c4926" guest></fd-thing>
+
+@element fd-thing
+@blurb Element providing proof of concept of a Thing card, with all needed features
+@status beta
+@homepage http://bestmazzo.github.io/fd-polymer-thing
+-->
+<polymer-element name="fd-thing" attributes="ssl address port apiVersion object uuid guest mode">
+
+  <template>
+     <style>
+    :host {
+      display: block;
+      position: relative;
+      font-size: 1.2rem;
+      font-weight: 300;
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+    }
+    paper-icon-button::shadow core-icon[role=img] {
+      width: 85px;
+      height: 85px;
+    }
+    </style>
+  <fd-api-settings
+    ssl="{{ssl}}" address="{{address}}" 
+    port="{{port}}" apiVersion="{{apiVersion}}"
+    apiUrl="{{apiUrl}}">
+  </fd-api-settings>
+
+  <fd-rest-service 
+    id="objectClick"
+    fdtype="things/{{object.uuid}}/click" 
+    auto="false" method="POST"
+    guest="{{guest}}">
+  </fd-rest-service>
+
+  <fd-rest-service 
+    id="objectBehaviorChange"
+    auto="false" method="POST"
+    guest="{{guest}}">
+  </fd-rest-service>  
+
+<fd-ispermitted permission="objects:update" allowed="{{canUpdate}}"></fd-ispermitted>
+<fd-generic-item on-icon-tap="{{tapObject}}" ensettings="{{canUpdate}}" mode="{{mode}}" guest="{{guest}}" item="{{object}}" uuid="{{uuid}}" type="things" wsType="objectchange">
+<icon>
+  <paper-icon-button src="{{objectIcon | asFreedomoticResource(apiUrl) }}" on-tap="{{tapObject}}" >
+  </paper-icon-button>
+</icon>
+<name>{{object.name}}</name>
+<description>{{object.description}}</description>
+<extra>
+  <template repeat="{{behavior in object.behaviors}}">
+    <div layout horizontal self-stretch >
+    <div layout style="padding-right:5px;height:32px;">{{behavior.name | translate(apiUrl)}}</div>
+    <template if="{{behavior['@class']=='com.freedomotic.model.object.RangedIntBehavior'}}" >
+      <paper-slider flex style="width:100%;" id="{{behavior.name}}" layout value="{{behavior.value}}" min="{{behavior.min}}" max="{{behavior.max}}" pin on-change="{{onBehaviorChange}}"></paper-slider>
+    </template>
+    <template if="{{behavior['@class']=='com.freedomotic.model.object.BooleanBehavior'}}" >
+      <paper-toggle-button id="{{behavior.name}}" layout checked="{{behavior.value}}" on-change="{{onBehaviorChange}}"></paper-toggle-button>
+    </template>
+    </div>
+  </template>
+</extra>
+<modify>
+<div layout vertical>
+<h3>{{object.name}}</h3>
+<paper-input label="{{'name' | translate(apiUrl) }}" value="{{object.name}}" floatingLabel></paper-input>
+<paper-input label="{{'description' | translate(apiUrl) }}" value="{{object.description}}" floatingLabel></paper-input>
+<paper-input label="{{'protocol' | translate(apiUrl) }}" value="{{object.protocol}}"floatingLabel></paper-input>
+<paper-input label="{{'address' | translate(apiUrl) }}" value="{{object.phisicalAddress}}" floatingLabel></paper-input>
+</div>
+</modify>
+</fd-generic-item>
+</template>
+  <script>
+    Polymer("fd-thing", {
+     /**
+       * The 'guest' attribute tells whether the API call should be made as a guest user 
+       *
+       * @attribute guest
+       * @type boolean
+       */
+     /**
+       * The 'thingUuid' attribute specifies the uuid of Thing to show
+       *
+       * @attribute thingUuid
+       * @type string
+       */
+     /**
+       * The 'address' attribute specifies the hostname or ip address of API service 
+       *
+       * @attribute address
+       * @type string
+       */
+    
+     /**
+       * The 'apiVersion' attribute specifies the API version to use 
+       *
+       * @attribute apiVersion
+       * @type string
+       */
+    
+     /**
+       * The 'port' attribute specifies the tcp port of API service. 
+       * Default value 0 mean the port number is choosen from the SSL attribute, 
+       * so port will be 9111 if no SSL, and 9113 is SSL
+       * @attribute port
+       * @type int
+       */
+    
+     /**
+       * The 'ssl' attribute tells whether the API call requires a encrypted connection 
+       *
+       * @attribute ssl
+       * @type boolean
+       */
+    mode: 'matCard',
+    guest: undefined,  
+    objectIcon: undefined,
+    object: undefined,
+    tapObject: function(){
+      this.$.objectClick.go();
+    },
+    objectChanged: function(){
+      if (!!this.object && !!this.object.representation){
+        this.objectIcon = this.object.representation[this.object.currentRepresentation].icon;
+      }
+    },
+    onBehaviorChange: function(evt, t,d){
+      for (behavior in this.object.behaviors){
+        if (this.object.behaviors[behavior].name === d.id){
+            this.$.objectBehaviorChange.fdtype="things/" + this.object.uuid + 
+              "/behaviorchange/"+ this.object.behaviors[behavior].name + "/" + this.object.behaviors[behavior].value;
+            console.log(this.$.objectBehaviorChange.fdtype);
+            this.$.objectBehaviorChange.go();
+        }
+      }
+    }
+  });
+  </script>
+
+</polymer-element>

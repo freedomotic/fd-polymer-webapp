@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-icons/hardware-icons.html">
+<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-commands.html">
+<link rel="import" href="../elements/fd-elements-list.html">
+<link rel="import" href="../elements/nautes-command-list.html">
+<!-- <link rel="import" href="../elements/nautes-command-add.html"> -->
+
+<polymer-element name="nautes-commands" attributes="">
+<template>
+    <style>
+      
+      :host {
+        display: block;
+        width: 100%;
+        font-family: Open Sans;
+      }
+
+    </style>
+<fd-elements-list elementType="COMMAND" bgColor="{{bgColor}}" btnColor="#f88" toast="{{toast}}">
+<list>
+        <fd-commands></fd-commands>
+        <!-- <nautes-command-list bgColor="{{bgColor}}" toast="{{toast}}"></nautes-command-list> -->
+</list>
+<new-element>
+        <nautes-command-add smallQuery="max-width: 640px" bgColor="{{bgColor}}" toast="{{toast}}">
+        </nautes-command-add>
+</new-element>
+</fd-elements-list>
+ </template>
+  <script>
+    Polymer("nautes-commands",{
+    });
+  </script>
+</polymer-element>

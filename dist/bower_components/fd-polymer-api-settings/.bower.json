@@ -1,0 +1,42 @@
+{
+  "name": "fd-polymer-api-settings",
+  "version": "0.2.0",
+  "keywords": [
+    "freedomotic",
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "fd-polymer-api-settings.html",
+  "dependencies": {
+    "core-elements": "polymer/core-elements#~0.5.2",
+    "core-localstorage": "polymer/core-localstorage#~0.5.2"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#^0.5.0"
+  },
+  "homepage": "https://github.com/freedomotic/fd-polymer-api-settings",
+  "authors": [
+    "Matteo Mazzoni <matteo@freedomotic.com>",
+    "Niko Zarzani <niko.zarzani@nautes.com>"
+  ],
+  "description": "Element providing DAO for Freedomotic API settings",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests"
+  ],
+  "_release": "0.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.0",
+    "commit": "65ad80c0970c6cb78545a3055394a0a7d7492a09"
+  },
+  "_source": "git://github.com/freedomotic/fd-polymer-api-settings.git",
+  "_target": "~0.2.0",
+  "_originalSource": "fd-polymer-api-settings"
+}

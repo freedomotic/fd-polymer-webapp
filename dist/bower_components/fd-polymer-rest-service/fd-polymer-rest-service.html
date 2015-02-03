@@ -1,0 +1,147 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-ajax/core-ajax.html">
+<link rel="import" href="../fd-polymer-api-settings/fd-polymer-api-settings.html">
+
+<!--
+Element providing a service for interfacing Freedomotic's Rest APIs.
+
+##### Example
+
+    <fd-rest-service 
+      apiUrl="http://fritz.bestmazzo.it:9111/v3/"
+      fdtype="system/info/framework"
+      method="GET" guest="true"
+      >
+    </fd-rest-service>
+
+@element fd-rest-service
+@blurb Element providing a service for interacting with Freedomoric's Rest APIs.
+@status beta
+@homepage http://freedomotic.github.io/fd-polymer-rest-service
+-->
+<polymer-element name="fd-rest-service" attributes="withCredentials fditems fdtype toast method auto params headers body contentType apiUrl guest">
+  <template>
+   <fd-api-settings apiUrl="{{apiUrl}}" guestAccess="{{guest}}"></fd-api-settings> 
+    <core-ajax id="ajax" 
+      auto="{{auto}}"
+      on-core-error="{{errorHandler}}"
+      on-core-response="{{elementsLoaded}}"
+      response="{{fditems}}"
+      handleAs="json"
+      headers="{{headers}}"
+      method="{{method}}"
+      params="{{params}}"
+      body="{{body}}"
+      contentType="{{contentType}}"
+      withCredentials="{{withCredentials}}">
+    </core-ajax>
+
+  </template>
+  <script>
+  Polymer('fd-rest-service', {
+    withCredentials: true,
+      /**
+       * The 'fdtype' attribute represents the path inside API tree
+       *
+       * @attribute fdtype
+       * @type string
+       */
+    fdtype:'',
+
+      /**
+       * The 'fditems' attribute collects data received as a response from a API call.
+       * Usually you link this attribute to a declared variable, using the "{{ }}" notation
+       * 
+       * @attribute fditems
+       * @type array
+       */
+    fditems: [],
+    
+      /**
+       * The 'method' attribute represents the HTTP method used for the current API call
+       *
+       * @attribute method
+       * @type string
+       */
+    method: "GET",
+
+      /**
+       * The 'auto' attribute tells whether API call should be fired imediately or explicitely by the go() call
+       *
+       * @attribute auto
+       * @type boolean
+       */
+    
+    auto: true,
+
+      /**
+       * The 'apiUrl' attribute represents the URL through which the service can reach the API 
+       *
+       * @attribute apiUrl
+       * @type string
+       */
+    apiUrl: undefined,
+
+      /**
+       * The 'guest' attribute tells whether the ajax access should provide generic guest login (guest:guest)
+       *
+       * @attribute guest
+       * @type boolean
+       */
+    guest: undefined,
+    contentType: "application/json",
+
+    observe: {
+      "fdtype apiUrl": "reloadUrl"
+    },
+    
+    created: function() {
+      this.fditems = [];
+    },
+    reloadUrl: function(){
+      if(!!this.apiUrl && !!this.fdtype){   
+        this.$.ajax.url = this.apiUrl + this.fdtype ;
+//        console.log("REST:" + this.apiUrl);
+      }
+    },
+
+    autoChanged: function(){
+      if(this.auto){
+        this.$.ajax.auto =  this.auto;
+      }
+    },
+    elementsLoaded: function(event) {
+//      console.log("Loaded " + this.fdtype + " data:", this.fditems);
+      this.fire("rest-response", event)
+    },
+    errorHandler: function(event){
+//      console.log("Error:", event.detail);
+      if(this.toast){
+        this.toast.text="There was a problem loading "+this.fdtype+" data.";
+        this.toast.show();
+      }
+      this.fire("rest-error", event);
+      event.stopPropagation();
+    },
+    go: function(){
+      this.reloadUrl();
+      this.$.ajax.go();
+    },
+    guestChanged: function(oldValue,newValue){
+//      console.log("GUEST:" + newValue );
+      if(newValue!= undefined){
+        if (this.$.ajax.headers == undefined) {
+          this.$.ajax.headers = {};
+        }
+        if(newValue== false){
+          this.$.ajax.headers.Authorization ='';
+        } else {      
+        this.$.ajax.headers.Authorization= "Basic Z3Vlc3Q6Z3Vlc3Q=";
+        }
+//        console.log("HEADER:" + this.$.ajax.headers.Authorization);
+      }
+    }
+    
+  });
+  </script>
+</polymer-element>

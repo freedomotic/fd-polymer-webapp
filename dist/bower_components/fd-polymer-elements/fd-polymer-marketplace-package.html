@@ -1,0 +1,144 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../fd-polymer-rest-service/fd-polymer-rest-service.html">
+<link rel="import" href="../fd-polymer-api-settings/fd-polymer-api-settings.html">
+<link rel="import" href="../fd-polymer-i18next-translate/fd-polymer-i18next-translate.html">
+<link rel="import" href="../paper-shadow/paper-shadow.html">
+<link rel="import" href="../paper-slider/paper-slider.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../fd-polymer-generics/fd-generic-item.html">
+<!--
+Element providing proof of concept of a Thing card, with all needed features
+
+##### Example
+
+    <fd-thing  address="fritz.bestmazzo.it" port="9111" apiVersion="v3" 
+          thingUuid="76fd619c-617b-4fb7-9870-8f08164c4926" guest></fd-thing>
+
+@element fd-thing
+@blurb Element providing proof of concept of a Thing card, with all needed features
+@status beta
+@homepage http://bestmazzo.github.io/fd-polymer-thing
+-->
+<polymer-element name="fd-marketplace-package" attributes="ssl address port apiVersion package uuid guest mode bound">
+    <template>
+        <style>
+            :host {
+                display: block;
+                position: relative;
+                font-size: 1.2rem;
+                font-weight: 300;
+                font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+            }
+            paper-icon-button::shadow core-icon[role=img] {
+                width: 85px;
+                height: 85px;
+            }
+            paper-icon-button.mini::shadow core-icon[role=img] {
+                width: 20px;
+                height: 20px;
+            }
+            paper-icon-button.mini:hover {
+                color: #8bae2d;
+            }
+        </style>
+        <fd-api-settings ssl="{{ssl}}" address="{{address}}" port="{{port}}" apiVersion="{{apiVersion}}" apiUrl="{{apiUrl}}">
+        </fd-api-settings>
+        <fd-rest-service id="installPluginService" auto="false" method="POST" on-rest-response="{{started}}" toast="{{toast}}">
+        </fd-rest-service>
+
+        <fd-generic-item ensettings="false" on-icon-tap="{{tapPlugin}}" mode="{{mode}}" type="marketplace/plugins" item="{{package}}" guest="{{guest}}" uuid="{{uuid}}">
+            <icon>
+                <paper-icon-button src="{{package.field_icon[0].filepath}}">
+                </paper-icon-button>
+            </icon>
+            <name>{{package.title}}</name>
+            <description>{{package.field_description[0].value}}</description>
+            <extra>
+                Website:
+                <a href="{{plugin.uri}}">
+                    <paper-icon-button class="mini" icon="launch"></paper-icon-button>
+                </a>
+                <div>Status: {{package.field_status[0].value}}</div>
+                <div>OS:
+                    <template repeat="{{os in package.field_os}}">{{os.value}} </template>
+                </div>
+            </extra>
+            <buttons>
+                <template if="{{extractFile()}}">
+                <paper-icon-button class="mini" icon="shopping-basket" on-tap="{{doInstallPlugin}}"></paper-icon-button>
+                </template>
+            </buttons>
+            <modify></modify>
+        </fd-generic-item>
+    </template>
+    <script>
+        Polymer("fd-marketplace-package", {
+            /**
+             * The 'guest' attribute tells whether the API call should be made as a guest user
+             *
+             * @attribute guest
+             * @type boolean
+             */
+            /**
+             * The 'thingUuid' attribute specifies the uuid of Thing to show
+             *
+             * @attribute thingUuid
+             * @type string
+             */
+            /**
+             * The 'address' attribute specifies the hostname or ip address of API service
+             *
+             * @attribute address
+             * @type string
+             */
+
+            /**
+             * The 'apiVersion' attribute specifies the API version to use
+             *
+             * @attribute apiVersion
+             * @type string
+             */
+
+            /**
+             * The 'port' attribute specifies the tcp port of API service.
+             * Default value 0 mean the port number is choosen from the SSL attribute,
+             * so port will be 9111 if no SSL, and 9113 is SSL
+             * @attribute port
+             * @type int
+             */
+
+            /**
+             * The 'ssl' attribute tells whether the API call requires a encrypted connection
+             *
+             * @attribute ssl
+             * @type boolean
+             */
+            mode: 'matCard',
+            guest: undefined,
+            package: undefined,
+            extractFile: function() {
+                var filePath;
+                for (var id in this.package.field_file) {
+                    if (this.package.field_file[id].filename.indexOf("5.6") > -1) {
+                        filePath = this.package.field_file[id].filepath;
+                        break;
+                    }
+                }
+                return filePath;
+            },
+            doInstallPlugin: function() {
+                var uri = this.extractFile();
+                if (uri) {
+                    this.$.installPluginService.fdtype = "marketplace/plugins/"+ this.package.title +"/install/";
+                    this.$.installPluginService.go();
+                }
+            },
+            packageChanged: function() {
+                //   console.log("PACKAGE: ",this.package);
+            }
+        });
+    </script>
+
+</polymer-element>

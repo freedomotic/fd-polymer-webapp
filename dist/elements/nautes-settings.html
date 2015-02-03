@@ -1,0 +1,151 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-localstorage/core-localstorage.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-icons/image-icons.html">
+<link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+
+
+<polymer-element name="nautes-settings" attributes="color">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color: #444;
+      }
+      div{
+        line-height: 40px;
+        font-family: Open Sans;
+      }
+
+      .row{
+        margin-top: 20px;
+      }
+      .row-fab{
+        width: 40%;
+        margin-top: 20px;
+      }
+      .fab{
+        background-color: #9C9;
+      }
+      paper-input{
+        width: 220px;
+      }
+    </style>
+
+    <div layout vertical center>
+    <div layout horizontal >
+     <a href="/setup.html"><core-icon icon="settings-applications"></core-icon></a>
+    </div>
+      <div class="row" layout horizontal end>
+        <core-localstorage id="LSapiurl" 
+          name="apiurl" 
+          value="{{apiurl}}">
+        </core-localstorage>
+        <div>API URL: </div>
+        <paper-input id="apiInput"
+          label="{{apiurl}}" 
+          inputValue="{{newAPIUrl}}">
+        </paper-input>
+      </div>
+
+      <div class="row" layout horizontal center>
+        <core-localstorage id="LScr" 
+          name="credentialrequired" 
+          value="{{credentialrequired}}">
+        </core-localstorage>
+          <div>{{"login_msg" | translate }}:  </div>
+          <paper-toggle-button checked="{{newCredentialRequired}}">
+          </paper-toggle-button>
+      </div>
+
+      <div class="row" layout horizontal center>
+        <core-localstorage id="LSssl" 
+          name="ssl" 
+          value="{{ssl}}">
+        </core-localstorage>
+        <div>SSL: </div>
+        <paper-toggle-button checked="{{newSSL}}">
+        </paper-toggle-button>
+      </div>
+
+      <div class="row" layout horizontal center>
+        <core-localstorage id="LSlocale" 
+          name="locale" 
+          value="{{locale}}">
+        </core-localstorage>
+        <div>{{ "language" | translate }}: </div>
+        <paper-radio-group selected="{{newLocale}}">
+                                     <paper-radio-button name="en-US" label="English">
+                                      </paper-radio-button>
+                                      <paper-radio-button name="it-IT" label="Italiano">
+                                      </paper-radio-button>
+                                    </paper-radio-group>
+      </div>
+      
+      <paper-fab class="fab" icon="arrow-forward" on-tap="{{applyChanges}}"></paper-fab>
+
+    </div>
+
+  </template>
+  <script>
+    Polymer("nautes-settings",{
+
+      newAPIUrl: "",
+
+      newCredentialRequired: true,
+
+      newSSL: true,
+
+      ready: function(){
+
+        if(localStorage["credentialrequired"] == "true"){
+          this.newCredentialRequired = true;
+        } else {
+          this.newCredentialRequired = false;
+        }
+
+        if(localStorage["ssl"] == "true"){
+          this.newSSL = true;
+        } else {
+          this.newSSL = false;
+        }
+
+        if(localStorage["locale"]){
+          this.newLocale = JSON.parse(localStorage["locale"]);
+        }
+
+      },
+
+      applyChanges: function(){
+
+        if(this.newAPIUrl != ""){
+          this.$.LSapiurl.value = this.newAPIUrl;
+        }
+
+        this.$.LSlocale.value = this.newLocale;
+
+        console.log(this.newLocale);
+
+        this.$.LScr.value = this.newCredentialRequired;
+        
+        this.$.LSssl.value = this.newSSL;
+
+        window.setTimeout(function(){
+          location.reload();
+        }, 500);
+        
+      },
+
+      colorChanged: function(){
+        this.style.color = this.color;
+        this.$.apiInput.style.color = this.color;
+      }
+
+    });
+  </script>
+</polymer-element>

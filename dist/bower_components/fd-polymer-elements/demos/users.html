@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>fd-polymer-thing Demo</title>
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+   <link rel="import" href="../fd-polymer-users.html">
+
+</head>
+<body unresolved>
+<fd-api-settings
+    address="fritz.bestmazzo.it" 
+    port="9111" 
+    apiVersion="v3"
+    guest="true">
+</fd-api-settings>
+<div layout vertical style="width:100%">
+	<div layout horizontal wrap>
+ 		<fd-user guest="true" uuid="admin" style="padding:5px;"></fd-user>
+ 	</div> 
+	<p>A list of `fd-user`s looks like this:</p>
+	<fd-users guest="true"></fd-users>
+</div> 
+</body>
+</html>

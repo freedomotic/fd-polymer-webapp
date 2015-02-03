@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>fd-polymer-environment Demo</title>
+
+  <link rel="import" href="../polymer/polymer.html">
+  <link rel="import" href="fd-polymer-environments.html">
+  <link rel="import" href="../fd-polymer-rest-service/fd-polymer-rest-service.html">
+
+</head>
+<body is="auto-binding" id="fd-environment-demo">
+
+  <p>An `fd-polymer-environment` looks like this:</p>
+
+  <fd-api-settings
+    ssl="false" address="fritz.bestmazzo.it" 
+    port="9111" apiVersion="v3" 
+    guestAccess="true">
+  </fd-api-settings>
+
+   <fd-environment envuuid="df28cda0-a866-11e2-9e96-0800200c9a66" guest="true"></fd-environment> 
+
+  <fd-environments guest="true"></fd-environments>
+  <script>
+    //var t = document.querySelector('#fd-environment-demo');
+    //t.environments = [];
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-triggers.html">
+<!-- <link rel="import" href="../elements/nautes-trigger-row.html"> -->
+
+<polymer-element name="nautes-trigger-list" attributes="bgColor toast">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background-color: {{bgColor}};
+      }
+    </style>
+
+<!--    <fd-rest-service fdtype="triggers" fditems="{{triggers}}" toast="{{toast}}" method="GET">
+    </fd-rest-service> -->
+
+    <div layout vertical center>
+      <template repeat="{{trigger in triggers}}">
+       <!-- <nautes-trigger-row bgColor="{{bgColor}}" trigger="{{trigger}}">
+        </nautes-trigger-row> -->
+        <fd-triggers></fd-triggers>
+      </template>
+    </div>    
+
+  </template>
+  <script>
+    Polymer("nautes-trigger-list",{
+
+    });
+  </script>
+</polymer-element>

@@ -1,0 +1,35 @@
+{
+  "name": "fd-polymer-rest-service",
+  "version": "0.2.6",
+  "keywords": [
+    "freedomotic",
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "fd-polymer-rest-service.html",
+  "dependencies": {
+    "polymer": "~0.5.2",
+    "core-ajax": "polymer/core-ajax#~0.5.2",
+    "fd-polymer-api-settings": "~0.2.0"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#^0.5.0"
+  },
+  "homepage": "https://github.com/freedomotic/fd-polymer-rest-service",
+  "authors": [
+    "Matteo Mazzoni <matteo@freedomotic.com>",
+    "Niko Zarzani <niko.zarzani@nautes.com>"
+  ],
+  "description": "Element providing DAO for Freedomotic API settings",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests"
+  ]
+}
+

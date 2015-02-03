@@ -1,0 +1,35 @@
+{
+  "name": "fd-polymer-generics",
+  "version": "0.0.4",
+  "keywords": [
+    "freedomotic",
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "fd-polymer-generics.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.1",
+    "fd-polymer-card": "~0.2.8",
+    "fd-polymer-rest-service": "~0.2.2",
+    "fd-polymer-ws-service": "~0.1.6",
+    "paper-elements": "polymer/paper-elements#~0.5.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.0.0"
+  },
+  "authors": [
+    "Matteo Mazzoni <matteo@bestmazzo.it>",
+    "Niko Zarzani <niko.zarzani@nautes.com>"
+  ],
+  "description": "Elements providing a basic way to show sinlge or multimple items",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests"
+  ]
+}

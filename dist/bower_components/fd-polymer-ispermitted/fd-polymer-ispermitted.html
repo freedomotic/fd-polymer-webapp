@@ -1,0 +1,94 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../fd-polymer-api-settings/fd-polymer-api-settings.html">
+<link rel="import" href="../fd-polymer-ws-service/fd-polymer-ws-service.html">
+
+<!--
+Element providing a service for checking a user permission
+
+##### Example
+
+    <fd-ispermitted permission="*:read">
+      This message is shown only if user has proper permissions.
+    </fd-ispermitted>
+
+@element fd-ws-service
+@blurb Element providing a service for checking a user permission
+@status alpha
+@homepage http://freedomotic.github.io/fd-polymer-ispermitted
+-->
+
+<polymer-element name="fd-ispermitted" attributes="permission allowed">
+  <template>
+    <template if="{{allowed}}">
+      <content></content>
+    </template>
+  </template>
+  <script>
+    (function() {
+        var ipws = undefined;
+        var ipwsConnected = false;
+
+        Polymer("fd-ispermitted", {
+            /**
+             * The 'permission' attribute contains a string representing a Wildcard permission to check
+             *
+             * @attribute permission
+             * @type string
+             * @default undefined
+             */
+            auto: true,
+            allowed: false,
+            get connected(){
+              return ipwsConnected;
+            },
+            set connected(val){
+              ipwsConnected=val;
+            },
+            get service() {
+              return ipws;
+            },
+            set service(val){
+              ipws = val;
+            },
+            ready: function() {
+              if (!this.service) {
+                this.service = document.createElement("fd-ws-service");
+                this.service.wstype = "ispermitted";
+                this.service.id = "ispermitted";
+              }
+              // console.log("SERVICE:", this.service);
+              var self = this;
+              // TODO: find a way of deregistering event listeners 
+              this.service.addEventListener('message', function(e) {
+                self.handleMessage(e);
+              });
+              this.service.addEventListener('open', function(e) {
+                //console.log("WS OPEN");
+                if (self.permission){
+                  // console.log("SENDING ON OPEN", self.permission);
+                  this.send(self.permission);
+                  self.connected = true;
+                }
+              });
+          },
+          handleMessage: function(e) {
+            var det = JSON.parse(e.detail);
+            if (det.permission == this.permission) {
+              // console.log("PERMISSION CHECK:", det);
+              this.allowed = det.allowed;
+            }
+          },
+          permissionChanged: function() {
+            // console.log("NEWPERMISSION:", this.permission);
+            if (this.connected) {
+              // console.log("SENDING ON PERMISSIONCHANGE", this.permission);
+              this.service.send(this.permission);
+            }
+          },
+          allowedChanged: function() {
+            // console.log(this.permission, " IS ", this.allowed);
+          }
+        });
+    })();
+  </script>
+</polymer-element>

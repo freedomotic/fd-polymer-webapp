@@ -1,0 +1,85 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-icons/image-icons.html">
+
+<link rel="import" href="../elements/fd-manageable-element.html">
+
+<polymer-element name="nautes-reaction-row" attributes="bgColor reaction toast">
+<template>
+  <style>
+
+    :host {
+      display: block;
+      position: relative;
+      background-color: {{bgColor}};
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 300;
+      font-family: Open Sans;
+    }
+
+    .reaction-row {
+      margin-bottom: 10px;
+      padding: 40px;
+      color: #444;
+      text-transform: lowercase;
+    }
+
+    span{
+      line-height: 24px;
+      margin-right: 5px;
+      font-size: 17px;
+    }
+
+    .trigger {
+      color: #89f;
+    }
+
+    .condition {
+      color: #cfc;
+    }
+
+    .command {
+      color: #f88;
+    }
+
+    .icon{
+      width:70px;
+      height: 70px;
+    }
+
+  </style>
+  <fd-manageable-element elmnt="{{reaction}}" apiBase="reactions" bgColor="{{bgColor}}">
+  <h2></h2>
+  <description>
+    <div class="reaction-row" layout vertical center-justified>
+      <div layout horizontal center>
+       <span class="trigger"> {{reaction.trigger.description}}</span>
+       <div layout vertical center start>
+        <template repeat="{{condition in reaction.conditions}}">
+          <span>and</span>
+          <span class="condition"> {{condition.description}}</span>
+        </template>
+      </div>
+      <span>then</span>
+      <div layout vertical center>
+        <template repeat="{{command in reaction.commands}}">
+          <span class="command"> {{command.description}}</span>
+        </template>
+      </div>
+    </div>
+  </div>
+</description>
+<element-icon>
+<core-icon class="icon" icon="send"></core-icon>
+</element-icon>
+<header></header>
+<form></form>
+</fd-manageable-element>
+</template>
+<script>
+  Polymer("nautes-reaction-row",{
+  });
+</script>
+</polymer-element>

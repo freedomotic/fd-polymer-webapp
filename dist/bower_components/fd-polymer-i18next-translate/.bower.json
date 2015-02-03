@@ -1,0 +1,42 @@
+{
+  "name": "fd-polymer-i18next-translate",
+  "version": "0.2.2",
+  "keywords": [
+    "freedomotic",
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "fd-polymer-i18next-translate.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.4",
+    "i18next": "~1.7.4"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#^0.5.2"
+  },
+  "homepage": "https://github.com/freedomotic/fd-polymer-i18next-translate",
+  "authors": [
+    "Matteo Mazzoni <matteo@freedomotic.com>",
+    "Niko Zarzani <niko.zarzani@nautes.com>"
+  ],
+  "description": "Element providing filter to translate strings using i18next library",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "../",
+    "test",
+    "tests"
+  ],
+  "_release": "0.2.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.2",
+    "commit": "26e180a55b36e103bee214d5165d1bbd318b1842"
+  },
+  "_source": "git://github.com/freedomotic/fd-polymer-i18next-translate.git",
+  "_target": "^0.2.2",
+  "_originalSource": "fd-polymer-i18next-translate"
+}

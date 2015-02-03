@@ -1,0 +1,85 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../fd-polymer-rest-service/fd-polymer-rest-service.html">
+<link rel="import" href="../fd-polymer-ws-service/fd-polymer-ws-service.html">
+<link rel="import" href="../fd-polymer-api-settings/fd-polymer-api-settings.html">
+<link rel="import" href="../fd-polymer-i18next-translate/fd-polymer-i18next-translate.html">
+<link rel="import" href="../fd-polymer-generics/fd-generic-list.html">
+<link rel="import" href="../fd-polymer-ispermitted/fd-polymer-ispermitted.html">
+<link rel="import" href="fd-polymer-plugin.html"> 
+<!--
+Element providing proof of concept of a Thing card, with all needed features
+
+##### Example
+
+    <fd-thing  address="fritz.bestmazzo.it" port="9111" apiVersion="v3" 
+          thingUuid="76fd619c-617b-4fb7-9870-8f08164c4926" guest></fd-thing>
+
+@element fd-thing
+@blurb Element providing proof of concept of a Thing card, with all needed features
+@status beta
+@homepage http://bestmazzo.github.io/fd-polymer-thing
+-->
+<polymer-element name="fd-plugins" attributes="ssl address port apiVersion guest mode">
+
+  <template>
+     <style>
+    :host {
+      display: block;
+      position: relative;
+      font-size: 1.2rem;
+      font-weight: 300;
+      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+    }
+
+    </style>
+<fd-generic-list type="plugins" wsType="pluginChange" items="{{plugins}}" guest="{{guest}}">
+  <template repeat="{{plugin in plugins}}">
+      <fd-plugin plugin="{{plugin}}" style="padding:5px;" mode="{{mode}}" ></fd-plugin> 
+  </template>
+  </fd-generic-list>
+     
+ </div>
+ </template>
+ 
+  <script>
+    Polymer("fd-plugins", {
+     /**
+       * The 'guest' attribute tells whether the API call should be made as a guest user 
+       *
+       * @attribute guest
+       * @type boolean
+       */
+     /**
+       * The 'address' attribute specifies the hostname or ip address of API service 
+       *
+       * @attribute address
+       * @type string
+       */
+    
+     /**
+       * The 'apiVersion' attribute specifies the API version to use 
+       *
+       * @attribute apiVersion
+       * @type string
+       */
+    
+     /**
+       * The 'port' attribute specifies the tcp port of API service. 
+       * Default value 0 mean the port number is choosen from the SSL attribute, 
+       * so port will be 9111 if no SSL, and 9113 is SSL
+       * @attribute port
+       * @type int
+       */
+    
+     /**
+       * The 'ssl' attribute tells whether the API call requires a encrypted connection 
+       *
+       * @attribute ssl
+       * @type boolean
+       */
+    mode: 'list'
+    });
+
+  </script>
+
+</polymer-element>

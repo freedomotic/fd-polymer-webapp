@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>fd-polymer-thing Demo</title>
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="../fd-polymer-commands.html"> 
+
+</head>
+<body unresolved>
+<fd-api-settings
+    address="fritz.bestmazzo.it" 
+    port="9111" 
+    apiVersion="v3"
+    guest="true">
+</fd-api-settings>
+<div layout vertical style="width:100%">
+	<div layout horizontal wrap>
+ 		<fd-command guest="true" uuid="879024b7-73bd-4bd9-a4c6-6b246e96aea0" style="padding:5px;"></fd-command>
+ 	<p>A list of `fd-command`s looks like this:</p>
+	<fd-commands guest="true"></fd-commands>
+</div> 
+</body>
+</html>

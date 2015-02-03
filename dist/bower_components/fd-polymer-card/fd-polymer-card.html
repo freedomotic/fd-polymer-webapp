@@ -1,0 +1,313 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-shadow/paper-shadow.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-dialog/paper-action-dialog.html">
+<!--
+Element providing a generic card
+
+##### Example
+
+    <fd-card></fd-card>
+
+@element fd-card
+@blurb Element providing a generic card
+@status beta
+@homepage http://freedomotic.github.io/fd-polymer-card
+-->
+<polymer-element name="fd-card" attributes="mode enextra ensettings eneoggle enehape">
+
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        font-size: 1.2rem;
+        font-weight: 300;
+        font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+      }
+      .row {
+        min-width: 100%;
+      }
+      .thing-container {
+        margin-bottom: 10px;
+        border-radius: 20px;
+      }
+      .card {
+        width: 290px;
+        min-height: 250px;
+      }
+      .chip {
+        width: 250px;
+        min-height: 150px;
+      }
+      .list {
+        width: 500px;
+        min-height: 100px;
+      }
+      .row {
+        width: 100%;
+        font-size: 0.8rem;
+        font-weight: 50;
+        color: #999;
+      }
+      .thing-subheader {
+        margin: 0px 10px;
+      }
+      .thing-actionbar {
+        margin: 5px;
+      }
+      #icon-list {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        background-color: #8bae2d;
+        padding: 0 5px;
+        height: 111px;
+      }
+      #extra {
+        font-size: 0.8rem;
+        padding: 5px;
+      }
+      #icon-card {
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        background-color: #8bae2d;
+        padding: 5px;
+      }
+      h2 {
+        margin: 5px 0px;
+      }
+      paper-icon-button {
+        color: #999;
+      }
+      paper-icon-button::shadow core-icon[role=icon] {
+        width: 40px;
+        height: 40px;
+      }
+      paper-icon-button.mini::shadow core-icon[role=img] {
+        width: 20px;
+        height: 20px;
+        color: white;
+      }
+      paper-icon-button:hover {
+        color: #555;
+      }
+    </style>
+
+    <paper-action-dialog backdrop autoCloseDisabled id="moddialog">
+      <content select="modify"></content>
+      <paper-button affirmative raised style="color:white;background-color:#8bae2d;<" on-tap="{{ saveItem }}">{{ 'save' | translate }}</paper-button>
+      <paper-button dismissive style="color:red;">{{ 'close' | translate }}</paper-button>
+    </paper-action-dialog>
+
+    <template if="{{ mode==='card' }}">
+      <paper-shadow animated z="1" class="thing-container card">
+        <div layout vertical start>
+          <div layout horizontal self-stretch>
+            <div id="icon-card">
+              <content select="icon"></content>
+            </div>
+            <div layout vertical flex self-stretch>
+              <div layout horizontal end reverse class="thing-actionbar">
+                <template if="{{enextra}}">
+                  <paper-icon-button class="mini" icon="settings-input-composite" on-tap="{{ toggleExtra }}"></paper-icon-button>
+                </template>
+                <template if="{{enshape}}">
+                  <paper-icon-button class="mini" icon="view-list" on-tap="{{ toggleCard }}"></paper-icon-button>
+                </template>
+                <template if="{{entoggle}}">
+                  <paper-icon-button class="mini" icon="settings-power" on-tap="{{ tapObject }}"></paper-icon-button>
+                </template>
+                <template if="{{ensettings}}">
+                  <paper-icon-button class="mini" icon="settings" on-tap="{{ toggleDialog }}" transition="core-transition-center"></paper-icon-button>
+                </template>
+                <content select="buttons"></content>
+              </div>
+            </div>
+          </div>
+          <div layout vertical self-stretch class="thing-subheader">
+            <h2><content select="name"></content></h2>
+            <small><content select="description"></content></small>
+            <template if="{{extra}}">
+              <div self-stretch id="extra">
+                <content select="extra"></content>
+              </div>
+            </template>
+          </div>
+        </div>
+      </paper-shadow>
+    </template>
+    <template if="{{ mode==='list'}}">
+      <paper-shadow animated z="1" class="thing-container list">
+        <div layout vertical>
+          <div layout horizontal>
+            <div id="icon-list">
+              <content select="icon"></content>
+            </div>
+            <div layout vertical flex self-stretch class="thing-subheader">
+              <h2><content select="name"></content></h2>
+              <small><content select="description"></content></small>
+              <div layout horizontal end reverse class="thing-actionbar">
+                <template if="{{enextra}}">
+                  <paper-icon-button class="mini" icon="settings-input-composite" on-tap="{{ toggleExtra }}"></paper-icon-button>
+                </template>
+                <template if="{{enshape}}">
+                  <paper-icon-button class="mini" icon="view-list" on-tap="{{ toggleCard }}"></paper-icon-button>
+                </template>
+                <template if="{{entoggle}}">
+                  <paper-icon-button class="mini" icon="settings-power" on-tap="{{ tapObject }}"></paper-icon-button>
+                </template>
+                <template if="{{ensettings}}">
+                  <paper-icon-button class="mini" icon="settings" on-tap="{{ toggleDialog }}" transition="core-transition-center"></paper-icon-button>
+                </template>
+                <content select="buttons"></content>
+              </div>
+            </div>
+          </div>
+          <template if="{{extra}}">
+            <div self-stretch id="extra">
+              <content select="extra"></content>
+            </div>
+          </template>
+        </div>
+      </paper-shadow>
+    </template>
+    <template if="{{ mode==='matCard' }}">
+      <paper-shadow animated z="1" class="card">
+        <div layout vertical center>
+          <div self-stretch style="background-color: #8bae2d; text-align:center;">
+            <content select="icon"></content>
+            <h3 style="color:white;"><content select="name"></content></h3>
+          </div>
+          <content select="description"></content>
+          <template if="{{extra}}">
+            <div self-stretch id="extra">
+              <content select="extra"></content>
+            </div>
+          </template>
+          <div layout horizontal reverse class="thing-actionbar">
+            <template if="{{enextra}}">
+              <paper-icon-button class="mini" icon="settings-input-composite" on-tap="{{ toggleExtra }}"></paper-icon-button>
+            </template>
+            <template if="{{enshape}}">
+              <paper-icon-button class="mini" icon="view-list" on-tap="{{ toggleCard }}"></paper-icon-button>
+            </template>
+            <template if="{{entoggle}}">
+              <paper-icon-button class="mini" icon="settings-power" on-tap="{{ tapObject }}"></paper-icon-button>
+            </template>
+            <template if="{{ensettings}}">
+              <paper-icon-button class="mini" icon="settings" on-tap="{{ toggleDialog }}" transition="core-transition-center"></paper-icon-button>
+            </template>
+            <content select="buttons"></content>
+          </div>
+        </div>
+      </paper-shadow>
+    </template>
+
+    <template if="{{ mode==='row' }}">
+      <div layout horizontal self-stretch justified class="row">
+        <div>
+          <content select="name"></content>
+        </div>
+        <div>
+          <content select="description"></content>
+        </div>
+        <div </div>
+          <div layout horizontal>
+            <template if="{{enextra}}">
+              <paper-icon-button class="mini" icon="settings-input-composite" on-tap="{{ toggleExtra }}"></paper-icon-button>
+            </template>
+            <template if="{{enshape}}">
+              <paper-icon-button class="mini" icon="view-list" on-tap="{{ toggleCard }}"></paper-icon-button>
+            </template>
+            <template if="{{entoggle}}">
+              <paper-icon-button class="mini" icon="settings-power" on-tap="{{ tapObject }}"></paper-icon-button>
+            </template>
+            <template if="{{ensettings}}">
+              <paper-icon-button class="mini" icon="settings" on-tap="{{ toggleDialog }}" transition="core-transition-center"></paper-icon-button>
+            </template>
+            <content select="buttons"></content>
+          </div>
+        </div>
+    </template>
+
+    <template if="{{ mode==='chip' }}">
+      <paper-shadow animated z="1" class="chip">
+        <div layout vertical fit>
+          <div layout horizontal flex start style="color:white;background-color: rgba(50, 50, 50, 0.9); text-align:center;">
+            <div layout vertical flex center>
+              <content select="icon"></content>
+              <div>
+                <content select="name"></content>
+              </div>
+             <!--  <small><content select="description"></content></small> -->
+            </div>
+            <div layout end vertical reverse class="thing-actionbar">
+              <template if="{{enextra}}">
+                <paper-icon-button class="mini" icon="settings-input-composite" on-tap="{{ toggleExtra }}"></paper-icon-button>
+              </template>
+              <template if="{{enshape}}">
+                <paper-icon-button class="mini" icon="view-list" on-tap="{{ toggleCard }}"></paper-icon-button>
+              </template>
+              <template if="{{entoggle}}">
+                <paper-icon-button class="mini" icon="settings-power" on-tap="{{ tapObject }}"></paper-icon-button>
+              </template>
+              <template if="{{ensettings}}">
+                <paper-icon-button class="mini" icon="settings" on-tap="{{ toggleDialog }}" transition="core-transition-center"></paper-icon-button>
+              </template>
+              <content select="buttons"></content>
+            </div>
+          </div>
+          <template if="{{extra}}">
+            <div self-stretch id="extra">
+              <content select="extra"></content>
+            </div>
+          </template>
+        </div>
+      </paper-shadow>
+    </template>
+  </template>
+  <script>
+    Polymer("fd-card", {
+      mode: 'list',
+      extra: false,
+      enextra: true,
+      entoggle: false,
+      ensettings: true,
+      enshape: true,
+      tapObject: function(event) {
+        this.fire("icon-tap", event);
+      },
+      toggleCard: function() {
+        switch (this.mode) {
+          case 'card':
+            this.mode = 'list';
+            break;
+          case 'list':
+            this.mode = 'matCard';
+            break;
+          case 'matCard':
+            this.mode = 'row';
+            break;
+          case 'row':
+            this.mode = 'chip';
+            break;
+          case 'chip':
+            this.mode = 'card';
+            break;
+        }
+      },
+      toggleExtra: function() {
+        this.extra = !this.extra;
+      },
+      toggleDialog: function() {
+        this.$.moddialog.toggle();
+      },
+      saveItem: function(evt) {
+        this.fire("save-item", evt);
+      }
+    });
+  </script>
+
+</polymer-element>

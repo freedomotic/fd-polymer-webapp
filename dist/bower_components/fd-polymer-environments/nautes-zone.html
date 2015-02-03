@@ -1,0 +1,60 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!-- <link rel="import" href="../elements/nautes-zone-object.html" -->
+
+<polymer-element name="nautes-zone" attributes="zone canvas toast">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-size: 1.2em;
+        color: #fff;
+        font-family: Open Sans;
+      }
+      #title{
+        position: absolute;
+        z-index: 4;
+        padding: 4px;
+      }
+    </style>
+    <div id="title">
+      {{zone.name}}
+    </div>
+    <!--
+    <template repeat="{{envObject in zone.objects}}">
+      <nautes-zone-object envObject="{{envObject}}" toast="{{toast}}"></nautes-zone-object>
+    </template> -->
+  </template>
+  <script>
+    Polymer("nautes-zone",{
+
+      zoneChanged: function(){
+        if(this.zone){
+          this.$.title.style.left = this.zone.shape.points[0].x +"px";
+          this.$.title.style.top = this.zone.shape.points[0].y +"px";
+        }
+      },
+
+      canvasChanged: function() {
+        console.log("CANVAS CHANGED");
+          var poly = this.zone.shape.points;
+          var context = this.canvas.getContext('2d');
+
+          var ranR = Math.floor(Math.random() * 255);
+          var ranG = Math.floor(Math.random() * 255);
+          var ranB = Math.floor(Math.random() * 255);
+
+          this.$.title.style.backgroundColor = "rgba("+ranR+","+ranG+","+ranB+",0.7)";
+          context.fillStyle = "rgba("+ranR+","+ranG+","+ranB+",0.2)";
+          context.beginPath();
+          context.moveTo(poly[0].x, poly[0].y);
+          for( item=1 ; item < poly.length ; item++ ){
+              context.lineTo( poly[item].x , poly[item].y );
+          }
+          context.closePath();
+          context.fill();
+      }
+
+    });
+  </script>
+</polymer-element>
