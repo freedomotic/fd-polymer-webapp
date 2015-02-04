@@ -5,36 +5,44 @@
 <polymer-element name="nautes-bottom-section" attributes="showContent">
   <template>
     <style>
-
       :host {
         width: 100%;
         display: block;
         padding-top: 35px;
       }
-
+      #blur {
+        position: absolute;
+        -webkit-filter: blur(2px);
+        -moz-filter: blur(2px);
+        -o-filter: blur(2px);
+        -ms-filter: blur(2px);
+        filter: blur(2px);
+        background-color: rgba(150,150,150,0.5);
+        z-index: 9100;
+      }
       .showObjects {
         position: absolute;
         top: 0px;
         left: 50%;
         margin-left: -45px;
       }
-
-      .content-container{
+      .content-container {
+        position:relative;
         overflow-y: auto;
         width: 100%;
         height: 100%;
         margin-bottom: 50px;
+        z-index: 9200;
       }
-
-      .content-container::-webkit-scrollbar { 
-        display: none; 
+      .content-container::-webkit-scrollbar {
+        display: none;
       }
-
     </style>
 
     <nautes-half-circle class="showObjects" icon="{{icon}}" on-tap="{{showObjects}}" orientation="{{showObjectsOrientation}}">
     </nautes-half-circle>
     <core-a11y-keys on-keys-pressed="{{ showObjects }}" keys="2 ctrl+o"></core-a11y-keys>
+    <div id="blur" fit></div>
     <template if="{{showContent}}">
       <div class="content-container">
         <content>
@@ -44,21 +52,22 @@
 
   </template>
   <script>
-    Polymer("nautes-bottom-section",{
+    Polymer("nautes-bottom-section", {
 
-      created: function(){
+      created: function() {
         this.showObjectsOrientation = "top";
         this.icon = "expand-less";
         this.showContent = false;
       },
 
-      showContentChanged: function(){
-        if(this.showObjectsOrientation === "top"){
+      showContentChanged: function() {
+        if (this.showObjectsOrientation === "top") {
           this.showObjectsOrientation = "bottom";
           this.style.height = "60%";
           this.icon = "expand-more";
           this.style.backgroundColor = "rgba(50,50,50,0.4)";
-        } else {
+        }
+        else {
           this.showObjectsOrientation = "top";
           this.style.height = "auto";
           this.icon = "expand-less";
@@ -66,7 +75,7 @@
         }
       },
 
-      showObjects: function(){
+      showObjects: function() {
         this.showContent = !this.showContent;
       }
 

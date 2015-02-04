@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/fd-polymer-ws-service/fd-polymer-ws-service.html">
 <link rel="import" href="../bower_components/fd-polymer-ispermitted/fd-polymer-ispermitted.html">
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-things.html">
 <link rel="import" href="../bower_components/fd-polymer-environments/fd-polymer-environments.html">
@@ -94,6 +95,7 @@
       <core-image class="background" src="images/backgrounds/{{background}}" sizing="cover" preload fade></core-image>
     </template>
     <div fit>
+      <fd-ws-service wstype="messagetoast" id="toastws" on-message="{{updateToast}}"></fd-ws-service>
       <paper-toast id="toast" text="There was a problem loading data.">
       </paper-toast>
 
@@ -127,7 +129,7 @@
         </fd-environments>
       </div>
       <nautes-bottom-section showContent="{{ expanded }}" class="bottom-section">
-        <fd-things mode="chip"></fd-things>
+        <fd-things mode="chip" ></fd-things>
       </nautes-bottom-section>
 
       <template if="{{ displaySettings }}">
@@ -173,9 +175,6 @@
           this.expanded = false;
         }
       },
-      expandedChanged: function() {
-        this.blur = this.expanded;
-      },
       hideAll: function() {
         this.hideBottomSection();
         this.displaySettings = false;
@@ -197,7 +196,6 @@
         this.displayInfo = true;
         this.blur = !this.blur;
       },
-
       closeSection: function() {
         this.hideAll();
         this.blur = false;
@@ -206,6 +204,10 @@
       doLogout: function() {
         this.$.logoutService.go();
         this.fire("logout", null);
+      },
+      updateToast: function(e){
+        this.$.toast.text=e;
+        this.$.toast.opened=true;
       }
 
     });
