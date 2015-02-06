@@ -95,7 +95,7 @@
       <core-image class="background" src="images/backgrounds/{{background}}" sizing="cover" preload fade></core-image>
     </template>
     <div fit>
-      <fd-ws-service wstype="messagetoast" id="toastws" on-message="{{updateToast}}"></fd-ws-service>
+      <fd-ws-service wstype="messagecallout" id="toastws" on-message="{{updateToast}}"></fd-ws-service>
       <paper-toast id="toast" text="There was a problem loading data.">
       </paper-toast>
 
@@ -206,7 +206,9 @@
         this.fire("logout", null);
       },
       updateToast: function(e){
-        this.$.toast.text=e;
+        var msg = JSON.parse(e.detail);
+        //console.log("CALLOUT",msg);
+        this.$.toast.text=msg.message;
         this.$.toast.opened=true;
       }
 

@@ -12,11 +12,6 @@
       }
       #blur {
         position: absolute;
-        -webkit-filter: blur(2px);
-        -moz-filter: blur(2px);
-        -o-filter: blur(2px);
-        -ms-filter: blur(2px);
-        filter: blur(2px);
         background-color: rgba(150,150,150,0.5);
         z-index: 9100;
       }
@@ -25,6 +20,7 @@
         top: 0px;
         left: 50%;
         margin-left: -45px;
+        z-index:9150;
       }
       .content-container {
         position:relative;
@@ -33,6 +29,8 @@
         height: 100%;
         margin-bottom: 50px;
         z-index: 9200;
+        background-color: rgba(150,150,150,0.5);
+
       }
       .content-container::-webkit-scrollbar {
         display: none;
@@ -42,7 +40,6 @@
     <nautes-half-circle class="showObjects" icon="{{icon}}" on-tap="{{showObjects}}" orientation="{{showObjectsOrientation}}">
     </nautes-half-circle>
     <core-a11y-keys on-keys-pressed="{{ showObjects }}" keys="2 ctrl+o"></core-a11y-keys>
-    <div id="blur" fit></div>
     <template if="{{showContent}}">
       <div class="content-container">
         <content>
