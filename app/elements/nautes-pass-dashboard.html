@@ -35,6 +35,7 @@
         font-family: Open Sans;
         padding-left: 20px;
         padding-bottom: 18px;
+        z-index: 90000;
       }
       paper-toast a {
         color: #fff;
@@ -56,7 +57,7 @@
         right: 1%;
         background: rgba(50, 50, 50, 0.95);
         border-radius: 4px;
-        z-index: 13;
+        z-index: 13000;
         color: black;
       }
       .close {
@@ -99,37 +100,39 @@
       <paper-toast id="toast" text="There was a problem loading data.">
       </paper-toast>
 
-      <core-tooltip label="Exit" class="top-right" position="left">
-        <nautes-corner-button icon="exit-to-app" orientation="top-right" on-tap="{{doLogout}}">
+      <core-tooltip label="Alerts" class="top-right" position="left">
+        <nautes-corner-button icon="settings-voice" orientation="top-right" on-tap="{{ showAlerts }}">
+        </nautes-corner-button>
+        <core-a11y-keys on-keys-pressed="{{ showAlerts }}" keys="7"></core-a11y-keys>
+      </core-tooltip>
+
+      <fd-ispermitted permission="*">
+        <core-tooltip label="Settings" class="bottom-right" position="left">
+          <nautes-corner-button class="bottom-right" icon="settings" orientation="bottom-right" on-tap="{{ showSetup }}">
+          </nautes-corner-button>
+          <core-a11y-keys on-keys-pressed="{{ showSetup }}" keys="3"></core-a11y-keys>
+        </core-tooltip>
+      </fd-ispermitted>
+
+      <core-tooltip label="Exit" class="bottom-right" position="right">
+        <nautes-corner-button class="top-left" icon="exit-to-app" orientation="top-left" on-tap="{{doLogout}}">
         </nautes-corner-button>
         <fd-rest-service id="logoutService" fdType="users/_/logout" method="POST" auto="false" on-rest-response="{{gotoApp}}"></fd-rest-service>
         <core-a11y-keys on-keys-pressed="{{ doLogout }}" keys="9"></core-a11y-keys>
       </core-tooltip>
 
-<fd-ispermitted permission="*">
-        <core-tooltip label="Settings" class="bottom-right" position="left">
-        <nautes-corner-button class="bottom-right" icon="settings" orientation="bottom-right" on-tap="{{ showSetup }}">
-        </nautes-corner-button>
-        <core-a11y-keys on-keys-pressed="{{ showSetup }}" keys="3"></core-a11y-keys>
-      </core-tooltip>
-</fd-ispermitted>
-      <core-tooltip label="Alerts" class="bottom-right" position="right">
-        <nautes-corner-button class="top-left" icon="warning" orientation="top-left" on-tap="{{ showAlerts }}">
-        </nautes-corner-button>
-        <core-a11y-keys on-keys-pressed="{{ showAlerts }}" keys="7"></core-a11y-keys>
-      </core-tooltip>
-
-      <core-tooltip label="Info" class="bottom-right" position="right">
-        <nautes-corner-button class="bottom-left" icon="info" orientation="bottom-left" on-tap="{{ showInfo }}">
+      <core-tooltip label="Info" class="bottom-right" position="right" on-tap="{{ showInfo }}">
+        <nautes-corner-button class="bottom-left" icon="info" orientation="bottom-left">
         </nautes-corner-button>
         <core-a11y-keys target="{{}}" on-keys-pressed="{{ showInfo }}" keys="1 ctrl+i"></core-a11y-keys>
       </core-tooltip>
+
       <div layout vertical center self-stretch style="padding-top:10px;">
         <fd-environments class="{{ blur ? 'blur' : ''}}" on-tap="{{hideBottomSection}}" simple showNavigation>
         </fd-environments>
       </div>
       <nautes-bottom-section showContent="{{ expanded }}" class="bottom-section">
-        <fd-things mode="chip" ></fd-things>
+        <fd-things mode="chip"></fd-things>
       </nautes-bottom-section>
 
       <template if="{{ displaySettings }}">
@@ -162,7 +165,6 @@
     </div>
   </template>
   <script>
-
     Polymer("nautes-pass-dashboard", {
 
       displaySettings: false,
@@ -188,8 +190,13 @@
       },
       showAlerts: function() {
         this.hideAll();
-        this.displayAlerts = true;
-        this.blur = !this.blur;
+        if (!('webkitSpeechRecognition' in window)) {
+          this.setToast("Current browser doesn't support WebSpeeck API");
+        }
+        else {
+          this.displayAlerts = true;
+          this.blur = !this.blur;
+        }
       },
       showInfo: function() {
         this.hideAll();
@@ -205,11 +212,14 @@
         this.$.logoutService.go();
         this.fire("logout", null);
       },
-      updateToast: function(e){
+      updateToast: function(e) {
         var msg = JSON.parse(e.detail);
+        this.setToast(msg.message);
+      },
+      setToast: function(msg) {
         //console.log("CALLOUT",msg);
-        this.$.toast.text=msg.message;
-        this.$.toast.opened=true;
+        this.$.toast.text = msg;
+        this.$.toast.opened = true;
       }
 
     });

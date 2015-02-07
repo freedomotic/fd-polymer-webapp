@@ -6,3 +6,4 @@ app/translation
 .tmp
 test/bower_components/
 dist
+.c9

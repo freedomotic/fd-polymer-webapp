@@ -75,7 +75,7 @@
         <core-ajax id="config" auto url="./config.json" handleAs="json" on-core-response="{{configChanged}}" dsdsdresponse="{{config}}"></core-ajax>
 
         <fd-api-settings address="{{address}}" apiVersion="{{path}}" ssl="{{ssl}}" port="{{port}}" apiUrl="{{apiUrl}}" noSave="false"></fd-api-settings>
-        <fd-rest-service id="reLogin" fdType="users/_" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}"></fd-rest-service>
+        <fd-rest-service id="reLogin" fdType="system/info/framework" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}"></fd-rest-service>
 
         <template if="{{!successLogin}}">
             <fd-rest-service id="doLogin" auto="false" method="POST" contentType="application/x-www-form-urlencoded" fdType="users/_/login" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}" apiUrl="{{apiUrl}}"></fd-rest-service>

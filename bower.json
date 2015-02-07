@@ -1,30 +1,34 @@
 {
   "name": "freedomotic-polymer-webapp",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "dependencies": {
     "core-elements": "Polymer/core-elements#^0.5.2",
     "paper-elements": "Polymer/paper-elements#^0.5.2",
-    "polymer": "Polymer/polymer#^0.5.2",
+    "polymer": "Polymer/polymer#^0.5.4",
     "flatiron-director": "https://github.com/PolymerLabs/flatiron-director.git#~0.3.0",
     "x-websocket": "~0.2.0",
     "google-chart": "~0.0.1",
     "voice-elements": "~0.1.3",
-    "fd-polymer-rest-service": "^0.2.2",
-    "fd-polymer-elements": "^0.9.0",
-    "fd-polymer-card": "0.4.0",
-    "fd-polymer-environments": "^0.6.0",
-    "fd-polymer-ispermitted": "0.1.4",
-    "fd-polymer-i18next-translate": "^0.2.2"
+    "fd-polymer-rest-service": "~0.2.6",
+    "fd-polymer-ws-service": "~0.1.8",
+    "fd-polymer-elements": "~0.9.0",
+    "fd-polymer-generics": "~0.1.0",
+    "fd-polymer-card": "~0.4.4",
+    "fd-polymer-environments": "~0.6.4",
+    "fd-polymer-ispermitted": "~0.1.4",
+    "fd-polymer-i18next-translate": "0.2.2",
+    "fd-polymer-api-settings": "~0.2.1"
   },
   "devDependencies": {},
   "resolutions": {
-    "core-ajax": "~0.5.2",
-    "polymer": "~0.5.2",
-    "core-shared-lib": "^0.5.2",
-    "fd-polymer-card": "0.4.0",
-    "fd-polymer-api-settings": "~0.2.0",
-    "fd-polymer-i18next-translate": "0.2.2",
+    "core-ajax": "~0.5.4",
+    "core-shared-lib": "^0.5.4",
     "platform": "~0.3.1",
+    "fd-polymer-i18next-translate": "0.2.2",
+    "polymer": "^0.5.4",
+    "fd-polymer-card": "~0.4.4",
+    "fd-polymer-generics": "~0.1.0",
+    "fd-polymer-api-settings": "~0.2.1",
     "core-component-page": "^0.5"
   }
 }
