@@ -1,6 +1,6 @@
 {
   "name": "freedomotic-polymer-webapp",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "dependencies": {
     "core-elements": "Polymer/core-elements#^0.5.2",
     "paper-elements": "Polymer/paper-elements#^0.5.2",
@@ -12,7 +12,7 @@
     "fd-polymer-rest-service": "~0.2.6",
     "fd-polymer-ws-service": "~0.1.8",
     "fd-polymer-elements": "~0.9.0",
-    "fd-polymer-generics": "~0.1.0",
+    "fd-polymer-generics": "~0.1.1",
     "fd-polymer-card": "~0.4.4",
     "fd-polymer-environments": "~0.6.4",
     "fd-polymer-ispermitted": "~0.1.4",
