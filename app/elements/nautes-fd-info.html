@@ -15,24 +15,32 @@
         padding-top: 20px;
         text-align: center;
       }
+      #close {
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        z-index: 2;
+      }
       /* unvisited link */
-a:link {
-    color: #FFF;
-    text-decoration: none;
-}
-
-/* visited link */
-a:visited {
-    color: #FFF;
-    text-decoration: none;
-}
+      
+      a:link {
+        color: #FFF;
+        text-decoration: none;
+      }
+      /* visited link */
+      
+      a:visited {
+        color: #FFF;
+        text-decoration: none;
+      }
     </style>
 
     <fd-rest-service fdtype="system/info/framework" fditems="{{info}}" toast="{{toast}}">
     </fd-rest-service>
     <fd-api-settings apiurl="{{apiurl}}" address="{{address}}"></fd-api-settings>
+    <paper-fab icon="close" on-tap="{{ closeSettings }}" id="close"></paper-fab>
     <div layout vertical center>
-      <h4>Nautes Freedomotic Dashboard 0.1.5 (Beta)</h4>
+      <h4>Nautes Freedomotic Dashboard 0.2.0 (Beta)</h4>
       <span>This is a joint work of 
         <a target="_blank" href="http://www.freedomotic.com">Freedomotic</a> and 
         <a target="_blank" href="http://www.nautes.com">Nautes</a> Teams
@@ -41,8 +49,8 @@ a:visited {
       <span>Niko Zarzani &lt;niko.zarzani@nautes.com&gt;
       <br/> Matteo Mazzoni &lt;matteo@freedomotic.com&gt;</span>
       <hr/>
-      <h4>Connection params</h4>
-      API address: {{address}} <br/>
+      <h4>Connection params</h4> API address: {{address}}
+      <br/>
       <hr/>
       <h4>Freedomotic - {{'about' | translate}}</h4>
       <span>
@@ -51,11 +59,17 @@ a:visited {
         <bold>{{'author' | translate}}:</bold> {{info.FRAMEWORK_AUTHOR}} &lt;{{info.PROJECT_MAIL}}&gt;<br/>
         <bold>{{'licence' | translate}}:</bold> {{info.FRAMEWORK_LICENSE}}
       </span>
+      <h4>Credits</h4>
+      <p>Credits go here!!<br/> Write them, please...
+      </p>
     </div>
   </template>
   <script>
     Polymer("nautes-fd-info", {
-      info: {}
+      info: {},
+      closeSettings: function(e) {
+        this.fire("click-close", e);
+      }
     });
   </script>
 </polymer-element>

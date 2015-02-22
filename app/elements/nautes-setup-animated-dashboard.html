@@ -1,11 +1,16 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../bower_components/flatiron-director/flatiron-director.html">
-<link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-elements.html">
+<link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-roles.html">
+<link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-triggers.html">
+<link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-users.html">
+<link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-plugins.html">
+<link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-commands.html">
+<!-- <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-elements.html"> -->
 <link rel="import" href="../elements/nautes-setup-dashboard.html">
 <link rel="import" href="../elements/nautes-dashboard-page.html">
 <link rel="import" href="../elements/nautes-marketplace.html">
-<link rel="import" href="../elements/nautes-reactions.html">
+<!-- <link rel="import" href="../elements/nautes-reactions.html"> -->
 <link rel="import" href="../elements/nautes-system.html">
 
 
@@ -53,44 +58,58 @@
 
             <section name="marketplace">
                 <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="marketplace">
-                    <nautes-marketplace bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-marketplace>
+                    <template if="{{selected === 'marketplace'}}">
+                        <nautes-marketplace bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-marketplace>
+                    </template>
                 </nautes-dashboard-page>
             </section>
             <section name="plugins" on-page-back="{{back}}">
                 <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="plugins">
-                    <fd-plugins mode="chip"></fd-plugins>
+                    <template if="{{selected === 'plugins'}}">
+                        <fd-plugins mode="chip"></fd-plugins>
+                    </template>
                 </nautes-dashboard-page>
             </section>
-
-            <section name="family">
-                <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="family">
-                    <fd-users bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" mode="chip"></fd-users>
+            <section name="users">
+                <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="users">
+                    <template if="{{selected === 'users'}}">
+                        <fd-users bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" mode="chip"></fd-users>
+                    </template>
                 </nautes-dashboard-page>
             </section>
-            <section name="roles" on-page-back="{{back}}" fit>
+            <section name="roles" on-page-back="{{back}}">
                 <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="roles">
-                    <fd-roles bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" mode="chip"></fd-roles>
+                    <template if="{{selected === 'roles'}}">
+                        <fd-roles bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" mode="chip"></fd-roles>
+                    </template>
                 </nautes-dashboard-page>
             </section>
             <section name="system">
                 <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="setupinfo">
-                    <nautes-system bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-system>
+                    <template if="{{selected === 'system'}}">
+                        <nautes-system bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-system>
+                    </template>
                 </nautes-dashboard-page>
             </section>
-
             <section name="commands" on-page-back="{{back}}">
                 <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="commands">
-                    <fd-commands mode="chip" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </fd-commands>
+                    <template if="{{selected === 'commands'}}">
+                        <fd-commands mode="chip" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" fit> </fd-commands>
+                    </template>
                 </nautes-dashboard-page>
             </section>
             <section name="triggers">
                 <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="triggers">
-                    <fd-triggers mode="chip"></fd-triggers>
+                    <template if="{{selected === 'triggers'}}">
+                        <fd-triggers mode="chip" fit></fd-triggers>
+                    </template>
                 </nautes-dashboard-page>
             </section>
             <section name="reactions">
                 <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="reactions">
-                    <nautes-reactions bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-reactions>
+                    <template if="{{selected === 'reactions'}}">
+                        <nautes-reactions bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-reactions>
+                    </template>
                 </nautes-dashboard-page>
             </section>
 

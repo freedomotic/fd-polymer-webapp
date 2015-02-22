@@ -1,6 +1,6 @@
 [
 	{
-		"title": "Environment",
+		"btitle": "environment",
 		"description": "This section gives you all the information about your Environment",
 		"img": "home",
 		"iconcolor": "#444",
@@ -9,7 +9,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Reactions",
+		"btitle": "reactions",
 		"description": "This section lets you define Reactions on different triggers",
 		"img": "send",
 		"iconcolor": "#444",
@@ -18,7 +18,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Settings",
+		"btitle": "settings",
 		"description": "This section contains general dashboard Settings",
 		"img": "settings",
 		"iconcolor": "#444",
@@ -27,7 +27,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Info",
+		"btitle": "info",
 		"description": "This section contains general usage Information",
 		"img": "info-outline",
 		"iconcolor": "#444",
@@ -36,7 +36,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Messages",
+		"btitle": "messages",
 		"description": "This section contains the list of Messages received",
 		"img": "list",
 		"iconcolor": "#444",
@@ -45,7 +45,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Objects",
+		"btitle": "objects",
 		"description": "This section contains the list of your Objects",
 		"img": "image:camera",
 		"iconcolor": "#444",
@@ -54,7 +54,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Family",
+		"btitle": "family",
 		"description": "This section contains the list of users",
 		"img": "social:person",
 		"iconcolor": "#444",
@@ -63,7 +63,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Alerts",
+		"btitle": "alerts",
 		"description": "Send an alert to the medical platform",
 		"img": "warning",
 		"iconcolor": "#444",
@@ -72,7 +72,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Commands",
+		"btitle": "commands",
 		"description": "Manually run a user command",
 		"img": "hardware:gamepad",
 		"iconcolor": "#444",
@@ -81,7 +81,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Triggers",
+		"btitle": "triggers",
 		"description": "This section lets you define Triggers to handle environment changes",
 		"img": "image:flash-on",
 		"iconcolor": "#a8e",
@@ -90,7 +90,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Users",
+		"btitle": "users",
 		"description": "This section lets you manage Users",
 		"img": "social:person",
 		"iconcolor": "#fbf",
@@ -99,7 +99,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Roles",
+		"btitle": "roles",
 		"description": "This section lets you manage Roles",
 		"img": "social:people",
 		"iconcolor": "#fbf",
@@ -108,7 +108,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Plugins",
+		"btitle": "plugins",
 		"description": "This section lets you manage your Plugins",
 		"img": "extension",
 		"iconcolor": "#f66",
@@ -117,7 +117,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Rooms",
+		"btitle": "rooms",
 		"description": "This section lets you configure environment Rooms",
 		"img": "view-quilt",
 		"iconcolor": "#9f8",
@@ -126,7 +126,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "SetupObjects",
+		"btitle": "SetupObjects",
 		"description": "This section lets you configure environment Objects",
 		"img": "image:camera",
 		"iconcolor": "#adf",
@@ -135,7 +135,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "Marketplace",
+		"btitle": "marketplace",
 		"description": "This section lets you install and update Plugins in your System",
 		"img": "store",
 		"iconcolor": "#d95",
@@ -144,7 +144,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "System",
+		"btitle": "system",
 		"description": "This section lets you manage your System",
 		"img": "settings-applications",
 		"iconcolor": "#ee7",
@@ -153,7 +153,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "SetupSettings",
+		"btitle": "SetupSettings",
 		"description": "This section contains general dashboard Settings",
 		"img": "settings",
 		"iconcolor": "#eee",
@@ -162,7 +162,7 @@
 		"bgcolor": "#fff"
 	},
 	{
-		"title": "SetupInfo",
+		"btitle": "SetupInfo",
 		"description": "This section contains general usage Information",
 		"img": "info-outline",
 		"iconcolor": "#aaa",

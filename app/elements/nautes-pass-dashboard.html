@@ -11,8 +11,7 @@
 <link rel="import" href="../elements/nautes-corner-button.html">
 <link rel="import" href="../elements/nautes-bottom-section.html">
 <link rel="import" href="../elements/nautes-alerts.html">
-<!-- next line is commented for beta1 release -->
-<!-- <link rel="import" href="../elements/nautes-setup-animated-dashboard.html"> -->
+<link rel="import" href="../elements/nautes-setup-animated-dashboard.html">
 <link rel="import" href="../elements/nautes-fd-info.html">
 
 <polymer-element name="nautes-pass-dashboard" attributes="background">
@@ -24,6 +23,7 @@
         width: 100%;
         font-family: Open Sans;
         background-color: #dfd;
+        overflow: hidden;
       }
       .bottom-section {
         position: fixed;
@@ -35,7 +35,7 @@
         font-family: Open Sans;
         padding-left: 20px;
         padding-bottom: 18px;
-        z-index: 90000;
+        z-index: 900;
       }
       paper-toast a {
         color: #fff;
@@ -50,21 +50,21 @@
       }
       .section {
         position: fixed;
-        overflow-y: auto;
         top: 1%;
         bottom: 1%;
         left: 1%;
         right: 1%;
         background: rgba(50, 50, 50, 0.95);
         border-radius: 4px;
-        z-index: 13000;
+        z-index: 130;
         color: black;
       }
       .close {
         position: absolute;
         top: 5px;
-        left: 5px;
+        right: 30px;
         color: #fff;
+        z-index: 140;
       }
       .top-right {
         position: fixed;
@@ -91,6 +91,11 @@
         height: 100%;
         background-color: lightgray;
       }
+      .dropdown{
+        z-index: 120;
+        top: 10px;
+        left: 10px;
+      }
     </style>
     <template if="{{background}}">
       <core-image class="background" src="images/backgrounds/{{background}}" sizing="cover" preload fade></core-image>
@@ -103,22 +108,37 @@
       <core-tooltip label="Alerts" class="top-right" position="left">
         <nautes-corner-button icon="settings-voice" orientation="top-right" on-tap="{{ showAlerts }}">
         </nautes-corner-button>
-        <core-a11y-keys on-keys-pressed="{{ showAlerts }}" keys="7"></core-a11y-keys>
+        <core-a11y-keys target="{{}}" on-keys-pressed="{{ showAlerts }}" keys="7"></core-a11y-keys>
       </core-tooltip>
 
       <fd-ispermitted permission="*">
         <core-tooltip label="Settings" class="bottom-right" position="left">
           <nautes-corner-button class="bottom-right" icon="settings" orientation="bottom-right" on-tap="{{ showSetup }}">
           </nautes-corner-button>
-          <core-a11y-keys on-keys-pressed="{{ showSetup }}" keys="3"></core-a11y-keys>
+          <core-a11y-keys target="{{}}" on-keys-pressed="{{ showSetup }}" keys="3"></core-a11y-keys>
         </core-tooltip>
       </fd-ispermitted>
 
-      <core-tooltip label="Exit" class="bottom-right" position="right">
-        <nautes-corner-button class="top-left" icon="exit-to-app" orientation="top-left" on-tap="{{doLogout}}">
-        </nautes-corner-button>
+      <core-tooltip label="Profile" class="top-left" position="right">
+        <paper-menu-button >
+          <nautes-corner-button class="top-left"  icon="perm-identity" orientation="top-left">
+          </nautes-corner-button>
+          <paper-dropdown class="dropdown">
+            <core-menu class="menu">
+                <paper-item on-tap="{{doLogout}}">
+                  <core-icon icon="exit-to-app"></core-icon>
+                  <span>{{'exit' | translate}}</span>
+                </paper-item>
+                <paper-item on-tap="{{}}">
+                  <core-icon icon="face"></core-icon>
+                  <span>{{ 'user' | translate}}</span>
+                </paper-item>
+            </core-menu>
+          </paper-dropdown>
+        </paper-menu-button>
+
         <fd-rest-service id="logoutService" fdType="users/_/logout" method="POST" auto="false" on-rest-response="{{gotoApp}}"></fd-rest-service>
-        <core-a11y-keys on-keys-pressed="{{ doLogout }}" keys="9"></core-a11y-keys>
+        <core-a11y-keys target="{{}}" on-keys-pressed="{{ doLogout }}" keys="ctrl+x"></core-a11y-keys>
       </core-tooltip>
 
       <core-tooltip label="Info" class="bottom-right" position="right" on-tap="{{ showInfo }}">
@@ -128,19 +148,16 @@
       </core-tooltip>
 
       <div layout vertical center self-stretch style="padding-top:10px;">
-        <fd-environments class="{{ blur ? 'blur' : ''}}" on-tap="{{hideBottomSection}}" simple showNavigation>
+        <fd-environments class="{{ blur ? 'blur' : ''}}" on-tap="{{hideBottomSection}}" simple showNavigation showzones>
         </fd-environments>
       </div>
       <nautes-bottom-section showContent="{{ expanded }}" class="bottom-section">
-        <fd-things mode="chip"></fd-things>
+        <fd-things mode="chip" enAdd="true"></fd-things>
       </nautes-bottom-section>
 
       <template if="{{ displaySettings }}">
         <div class="section">
-          <div class="close" on-tap="{{ closeSection }}">
-            <core-icon icon="close"></core-icon>
-          </div>
-          <nautes-setup-animated-dashboard></nautes-setup-animated-dashboard>
+          <nautes-setup-animated-dashboard on-click-close="{{ closeSection }}"></nautes-setup-animated-dashboard>
         </div>
       </template>
 
@@ -155,10 +172,7 @@
 
       <template if="{{ displayInfo }}">
         <div class="section">
-          <div class="close" on-tap="{{ closeSection }}">
-            <core-icon icon="close"></core-icon>
-          </div>
-          <nautes-fd-info color="#fff"></nautes-fd-info>
+          <nautes-fd-info color="#fff" on-click-close="{{ closeSection }}"></nautes-fd-info>
         </div>
       </template>
       <core-a11y-keys target="{{}}" on-keys-pressed="{{ closeSection }}" keys="esc"></core-a11y-keys>

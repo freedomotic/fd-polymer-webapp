@@ -40,7 +40,7 @@
             <div layout vertical self-stretch end-justified style="padding:1em 2em;">
                 <template if="{{!config.address}}">
                     <paper-input-decorator id="addressInput" label="{{'address' | translate}}" floatingLabel error="Invalid Address">
-                        <input is="core-input" id="address" value="{{address}}"/>
+                        <input is="core-input" id="address" value="{{address}}" />
                     </paper-input-decorator>
 
                 </template>
@@ -116,7 +116,8 @@
                 if (address) {
                     address.isInvalid = true;
                 }
-            } else {
+            }
+            else {
                 var password = document.querySelector('#passwordInput');
                 if (password) {
                     password.isInvalid = true;
@@ -135,10 +136,12 @@
                 password.value = "";
             }
             if (loginButton) {
-                setTimeout(function() {
-                    var loginButton = document.querySelector('#loginButton');
-                    loginButton.disabled = false;
-                }, 5000);
+                this.async(
+                    function() {
+                        var loginButton = this.$.loginButton;
+                        loginButton.disabled = false;
+                    }, null, 5000);
+
             }
         };
         scope.gotoApp = function(e) {
@@ -174,7 +177,7 @@
         };
         scope.configChanged = function(response) {
             scope.config = response.detail.response;
-            console.log("CONFIG", scope.config);
+            //console.log("CONFIG", scope.config);
 
             scope.address = (!!scope.config.address) ? scope.config.address : scope.address;
             scope.port = (!!scope.config.port) ? scope.config.port : scope.port;
