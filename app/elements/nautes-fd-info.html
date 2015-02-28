@@ -52,12 +52,13 @@
       <h4>Connection params</h4> API address: {{address}}
       <br/>
       <hr/>
-      <h4>Freedomotic - {{'about' | translate}}</h4>
+      <h4>Freedomotic - {{'about' | t}}</h4>
       <span>
-        <bold>{{'release' | translate }}:</bold> 
-        {{info.FRAMEWORK_MAJOR}}.{{info.FRAMEWORK_MINOR}}.{{info.FRAMEWORK_BUILD}} "{{info.FRAMEWORK_VERSION_CODENAME}}" {{info.FRAMEWORK_RELEASE_DATE}} ({{info.FRAMEWORK_RELEASE_TYPE}})<br/>
-        <bold>{{'author' | translate}}:</bold> {{info.FRAMEWORK_AUTHOR}} &lt;{{info.PROJECT_MAIL}}&gt;<br/>
-        <bold>{{'licence' | translate}}:</bold> {{info.FRAMEWORK_LICENSE}}
+        <bold>{{'release' | t }}:</bold> 
+        {{info.FRAMEWORK_MAJOR}}.{{info.FRAMEWORK_MINOR}}.{{info.FRAMEWORK_BUILD}} "{{info.FRAMEWORK_VERSION_CODENAME}}" 
+        {{info.FRAMEWORK_RELEASE_DATE}} ({{info.FRAMEWORK_RELEASE_TYPE}})<br/>
+        <bold>{{'author' | t}}:</bold> {{info.FRAMEWORK_AUTHOR}} &lt;{{info.PROJECT_MAIL}}&gt;<br/>
+        <bold>{{'licence' | t}}:</bold> {{info.FRAMEWORK_LICENSE}}
       </span>
       <h4>Credits</h4>
       <p>Credits go here!!<br/> Write them, please...

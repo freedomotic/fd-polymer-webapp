@@ -33,10 +33,10 @@
       <core-toolbar>
         <paper-icon-button icon="arrow-back" on-tap="{{back}}"></paper-icon-button>
         <div flex >
-          {{selectedBox.btitle | translate}}
+          {{selectedBox.btitle | t}}
         </div>
          <paper-icon-button icon="search"></paper-icon-button>
-         <paper-input id="searchInput" autocomplete="off"></paper-input>
+         <paper-input id="searchInput" autocomplete="off" on-keyup="{{reloadFilter}}"></paper-input>
         <paper-icon-button icon="close" on-tap="{{close}}"></paper-icon-button>
       </core-toolbar>
       <div fit>
@@ -69,6 +69,10 @@
           this.style.backgroundColor = this.selectedBox.bgcolor;
           this.style.minHeight = window.innerHeight + "px";
         }
+      },
+      reloadFilter: function(e){
+        console.log("FILTER CHANGED TO", e);
+        this.fire('datafilter',e);
       }
     });
   </script>
