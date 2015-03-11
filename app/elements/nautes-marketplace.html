@@ -5,7 +5,7 @@
 <link rel="import" href="../elements/nautes-marketplace-categories.html">
 <link rel="import" href="../elements/nautes-marketplace-category.html">
 
-<polymer-element name="nautes-marketplace" attributes="toast bgColor">
+<polymer-element name="nautes-marketplace" attributes="toast bgColor mode">
   <template>
     <style>
       :host {
@@ -48,7 +48,7 @@
       <div class="title">Plugin List</div>
       <div layout vertical>
         <template repeat="{{category, index in categories}}">
-          <nautes-marketplace-category category="{{category}}"></nautes-marketplace-category>
+          <nautes-marketplace-category category="{{category}}" mode={{mode}}></nautes-marketplace-category>
         </template>
       </div>
     </div>

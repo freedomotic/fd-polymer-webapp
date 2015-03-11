@@ -4,7 +4,7 @@
 
 <!-- <link rel="import" href="../elements/nautes-marketplace-plugin.html"> -->
 
-<polymer-element name="nautes-marketplace-category" attributes="category">
+<polymer-element name="nautes-marketplace-category" attributes="category mode">
   <template>
     <style>
       :host {
@@ -17,7 +17,7 @@
     <div layout wrap horizontal>
     <template repeat="{{plugin in plugins}}">
       <!-- <nautes-marketplace-plugin plugin="{{plugin}}"></nautes-marketplace-plugin> -->
-      <fd-marketplace-package mode="chip" package="{{plugin}}" style="padding:5px;"></fd-marketplace-package>
+      <fd-marketplace-package mode={{mode}} package="{{plugin}}" style="padding:5px;"></fd-marketplace-package>
     </template>
     </div>
   </template>

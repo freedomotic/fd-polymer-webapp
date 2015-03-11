@@ -6,7 +6,6 @@
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-users.html">
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-plugins.html">
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-commands.html">
-<!-- <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-elements.html"> -->
 <link rel="import" href="../elements/nautes-setup-dashboard.html">
 <link rel="import" href="../elements/nautes-dashboard-page.html">
 <link rel="import" href="../elements/nautes-marketplace.html">
@@ -59,28 +58,28 @@
             <section name="marketplace">
                 <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="marketplace">
                     <template if="{{selected === 'marketplace'}}">
-                        <nautes-marketplace bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-marketplace>
+                        <nautes-marketplace  mode="{{mode}}" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-marketplace>
                     </template>
                 </nautes-dashboard-page>
             </section>
             <section name="plugins" on-page-back="{{back}}">
-                <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="plugins">
+                <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" txtFilter="{{pluginFilter}}" hero hero-id="plugins">
                     <template if="{{selected === 'plugins'}}">
-                        <fd-plugins mode="chip"></fd-plugins>
+                        <fd-plugins mode="{{mode}}" txtFilter="{{pluginFilter}}"></fd-plugins>
                     </template>
                 </nautes-dashboard-page>
             </section>
             <section name="users">
-                <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="users">
+                <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" txtFilter="{{userFilter}}" selectedBox="{{selectedBox}}" hero hero-id="users">
                     <template if="{{selected === 'users'}}">
-                        <fd-users bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" mode="chip"></fd-users>
+                        <fd-users bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" mode="{{mode}}" txtFilter="{{userFilter}}"></fd-users>
                     </template>
                 </nautes-dashboard-page>
             </section>
             <section name="roles" on-page-back="{{back}}">
-                <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="roles">
+                <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="roles" txtFilter="{{roleFilter}}">
                     <template if="{{selected === 'roles'}}">
-                        <fd-roles bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" mode="chip"></fd-roles>
+                        <fd-roles bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" mode="{{mode}}" txtFilter="{{roleFilter}}"></fd-roles>
                     </template>
                 </nautes-dashboard-page>
             </section>
@@ -92,23 +91,23 @@
                 </nautes-dashboard-page>
             </section>
             <section name="commands" on-page-back="{{back}}">
-                <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="commands">
+                <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="commands" txtFilter="{{commandFilter}}">
                     <template if="{{selected === 'commands'}}">
-                        <fd-commands mode="chip" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" fit> </fd-commands>
+                        <fd-commands  mode="{{mode}}" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" fit txtFilter="{{commandFilter}}" enAdd="{{enAdd}}" > </fd-commands>
                     </template>
                 </nautes-dashboard-page>
             </section>
             <section name="triggers">
-                <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="triggers">
+                <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="triggers" txtFilter="{{triggerFilter}}">
                     <template if="{{selected === 'triggers'}}">
-                        <fd-triggers mode="chip" fit></fd-triggers>
+                        <fd-triggers mode="{{mode}}" fit txtFilter="{{triggerFilter}}" enAdd="{{enAdd}}"></fd-triggers>
                     </template>
                 </nautes-dashboard-page>
             </section>
             <section name="reactions">
-                <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="reactions">
+                <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="reactions" txtFilter="{{reactionFilter}}">
                     <template if="{{selected === 'reactions'}}">
-                        <nautes-reactions bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-reactions>
+                        <nautes-reactions bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" txtFilter="{{reactionFilter}}" mode="{{mode}}"> </nautes-reactions>
                     </template>
                 </nautes-dashboard-page>
             </section>
@@ -120,6 +119,7 @@
         Polymer("nautes-setup-animated-dashboard", {
             selected: "dashboard",
             selectedBox: null,
+            mode: 'matCard',
             selectedChanged: function() {
                 if (this.selected === "") {
                     this.selected = "dashboard";
@@ -129,8 +129,7 @@
             back: function(event, detail, sender) {
                 this.selected = "dashboard";
                 this.selectedBox = null;
-            },
-            
+            }
         });
     </script>
 </polymer-element>
