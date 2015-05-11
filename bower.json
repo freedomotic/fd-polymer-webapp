@@ -28,6 +28,7 @@
     "core-ajax": "~0.5.2",
     "core-shared-lib": "^0.5",
     "core-component-page": "^0.5",
-    "platform": "^0.4.0"
+    "platform": "^0.4.0",
+    "webcomponentsjs": "^0.6.0"
   }
 }

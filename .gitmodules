@@ -1,0 +1,27 @@
+[submodule "fd-deps/fd-polymer-elements"]
+	path = fd-deps/fd-polymer-elements
+	url = https://github.com/freedomotic/fd-polymer-elements.git
+[submodule "fd-deps/fd-polymer-generics"]
+	path = fd-deps/fd-polymer-generics
+	url = https://github.com/freedomotic/fd-polymer-generics.git
+[submodule "fd-deps/fd-polymer-card"]
+	path = fd-deps/fd-polymer-card
+	url = https://github.com/freedomotic/fd-polymer-card.git
+[submodule "fd-deps/fd-polymer-api-settings"]
+	path = fd-deps/fd-polymer-api-settings
+	url = https://github.com/freedomotic/fd-polymer-api-settings.git
+[submodule "fd-deps/fd-polymer-environments"]
+	path = fd-deps/fd-polymer-environments
+	url = https://github.com/freedomotic/fd-polymer-environments.git
+[submodule "fd-deps/fd-polymer-i18next-translate"]
+	path = fd-deps/fd-polymer-i18next-translate
+	url = https://github.com/freedomotic/fd-polymer-i18next-translate.git
+[submodule "fd-deps/fd-polymer-ispermitted"]
+	path = fd-deps/fd-polymer-ispermitted
+	url = https://github.com/freedomotic/fd-polymer-ispermitted.git
+[submodule "fd-deps/fd-polymer-rest-service"]
+	path = fd-deps/fd-polymer-rest-service
+	url = https://github.com/freedomotic/fd-polymer-rest-service.git
+[submodule "fd-deps/fd-polymer-ws-service"]
+	path = fd-deps/fd-polymer-ws-service
+	url = https://github.com/freedomotic/fd-polymer-ws-service.git
