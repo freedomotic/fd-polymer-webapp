@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-<link rel="import" href="../bower_components/fd-polymer-ws-service/fd-polymer-ws-service.html">
+<link rel="import" href="../bower_components/fd-polymer-ws-service/fd-polymer-generic-ws.html">
 <link rel="import" href="../bower_components/fd-polymer-ispermitted/fd-polymer-ispermitted.html">
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-things.html">
 <link rel="import" href="../bower_components/fd-polymer-environments/fd-polymer-environments.html">
@@ -101,7 +101,7 @@
       <core-image class="background" src="images/backgrounds/{{background}}" sizing="cover" preload fade></core-image>
     </template>
     <div fit>
-      <fd-ws-service wstype="messagecallout" id="toastws" on-message="{{updateToast}}"></fd-ws-service>
+      <fd-generic-ws type="messagecallout" id="toastws" on-message="{{updateToast}}" auto="true"></fd-generic-ws>
       <paper-toast id="toast" text="There was a problem loading data.">
       </paper-toast>
 
@@ -227,7 +227,7 @@
         this.fire("logout", null);
       },
       updateToast: function(e) {
-        var msg = JSON.parse(e.detail);
+        var msg = e.detail;
         this.setToast(msg.message);
       },
       setToast: function(msg) {

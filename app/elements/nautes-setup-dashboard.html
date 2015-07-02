@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../bower_components/core-media-query/core-media-query.html">
 <link rel="import" href="../bower_components/fd-polymer-ispermitted/fd-polymer-ispermitted.html">
+<link rel="import" href="../bower_components/fd-polymer-api-settings/fd-polymer-api-settings.html">
 
 <link rel="import" href="../elements/nautes-dashboard-service.html">
 <link rel="import" href="../elements/nautes-box.html">
@@ -44,7 +45,7 @@
         min-width: 200px;
       }
     </style>
-
+    <fd-api-settings webappConfig="{{webappConfig}}"></fd-api-settings>
     <nautes-dashboard-service boxesObjects="{{boxesObjects}}">
     </nautes-dashboard-service>
 
@@ -66,21 +67,25 @@
       
       <div id="container" horizontal layout>
         <div class="column" flex vertical layout>
-          <nautes-box target="{{boxesObjects.marketplace.btitle}}" box="{{boxesObjects.marketplace}}" on-tap="{{boxTap}}" flex hero hero-id="marketplace"></nautes-box>
+          <template if="{{webappConfig.enable_beta_features}}">
+            <nautes-box target="{{boxesObjects.marketplace.btitle}}" box="{{boxesObjects.marketplace}}" on-tap="{{boxTap}}" flex hero hero-id="marketplace"></nautes-box>
+          </template>
           <nautes-box target="{{boxesObjects.plugins.btitle}}" box="{{boxesObjects.plugins}}" on-tap="{{boxTap}}" flex hero hero-id="plugins"></nautes-box>
-
+          <nautes-box target="{{boxesObjects.system.btitle}}" box="{{boxesObjects.system}}" on-tap="{{boxTap}}" flex hero hero-id="system"></nautes-box>
         </div>
+        
         <div class="column" flex vertical layout>
           <nautes-box target="{{boxesObjects.users.btitle}}" box="{{boxesObjects.users}}" on-tap="{{boxTap}}" flex hero hero-id="users"></nautes-box>
           <nautes-box target="{{boxesObjects.roles.btitle}}" box="{{boxesObjects.roles}}" on-tap="{{boxTap}}" flex hero hero-id="roles"></nautes-box>
-          <nautes-box target="{{boxesObjects.system.btitle}}" box="{{boxesObjects.system}}" on-tap="{{boxTap}}" flex hero hero-id="system"></nautes-box>
         </div>
+        
+          <template if="{{webappConfig.enable_beta_features}}">
         <div class="column" flex vertical layout>
           <nautes-box target="{{boxesObjects.commands.btitle}}" box="{{boxesObjects.commands}}" on-tap="{{boxTap}}" flex two hero hero-id="commands"></nautes-box>
           <nautes-box target="{{boxesObjects.triggers.btitle}}" box="{{boxesObjects.triggers}}" on-tap="{{boxTap}}" flex hero hero-id="triggers"></nautes-box>
           <nautes-box target="{{boxesObjects.reactions.btitle}}" box="{{boxesObjects.reactions}}" on-tap="{{boxTap}}" flex two hero hero-id="reactions"></nautes-box>
-
         </div>
+        </template>
       </div>
     </template>
 

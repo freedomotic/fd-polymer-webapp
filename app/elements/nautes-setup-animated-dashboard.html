@@ -6,6 +6,7 @@
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-users.html">
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-plugins.html">
 <link rel="import" href="../bower_components/fd-polymer-elements/fd-polymer-commands.html">
+<link rel="import" href="../bower_components/fd-polymer-api-settings/fd-polymer-api-settings.html">
 <link rel="import" href="../elements/nautes-setup-dashboard.html">
 <link rel="import" href="../elements/nautes-dashboard-page.html">
 <link rel="import" href="../elements/nautes-marketplace.html">
@@ -47,7 +48,7 @@
 
         <flatiron-director route="{{selected}}" autoHash on-director-route="{{routeChanged}}">
         </flatiron-director>
-
+        <fd-api-settings webappConfig="{{webappConfig}}"></fd-api-settings>
         <paper-toast id="toast" text="There was a problem loading data.">
         </paper-toast>
 
@@ -55,13 +56,15 @@
 
             <nautes-setup-dashboard name="dashboard" selected="{{selected}}" selectedBox="{{selectedBox}}" smallQuery="max-width: 640px"></nautes-setup-dashboard>
 
-            <section name="marketplace">
-                <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="marketplace">
-                    <template if="{{selected === 'marketplace'}}">
-                        <nautes-marketplace  mode="{{mode}}" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-marketplace>
-                    </template>
-                </nautes-dashboard-page>
-            </section>
+            <template if="{{webappConfig.enable_beta_features}}">
+                <section name="marketplace">
+                    <nautes-dashboard-page on-page-back="{{back}}" selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="marketplace">
+                        <template if="{{selected === 'marketplace'}}">
+                            <nautes-marketplace mode="{{mode}}" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}"> </nautes-marketplace>
+                        </template>
+                    </nautes-dashboard-page>
+                </section>
+            </template>
             <section name="plugins" on-page-back="{{back}}">
                 <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" txtFilter="{{pluginFilter}}" hero hero-id="plugins">
                     <template if="{{selected === 'plugins'}}">
@@ -93,7 +96,7 @@
             <section name="commands" on-page-back="{{back}}">
                 <nautes-dashboard-page selected="{{selected}}" selectedBox="{{selectedBox}}" hero hero-id="commands" txtFilter="{{commandFilter}}">
                     <template if="{{selected === 'commands'}}">
-                        <fd-commands  mode="{{mode}}" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" fit txtFilter="{{commandFilter}}" enAdd="{{enAdd}}" > </fd-commands>
+                        <fd-commands mode="{{mode}}" bgColor="{{selectedBox.bgcolor}}" toast="{{$.toast}}" fit txtFilter="{{commandFilter}}" enAdd="{{enAdd}}"> </fd-commands>
                     </template>
                 </nautes-dashboard-page>
             </section>
