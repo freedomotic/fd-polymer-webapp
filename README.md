@@ -62,3 +62,6 @@ To test the latest deployed version be sure to clear the cache data before doing
 * Run `git submodule update` to fetch repos data
 * Prepare bower development environment for dependencies (this may take a while): `cd fd-deps; bash ./do-link.sh`
 * Execute steps 7~8 above
+
+#####Saving changes on webapp or submodules code 
+

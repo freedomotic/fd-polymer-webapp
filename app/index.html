@@ -125,19 +125,25 @@
                     password.isInvalid = true;
                 }
             }
-            // block login button fo 3 seconds
-            var loginButton = document.querySelector('#loginButton');
-            if (loginButton) {
-                loginButton.disabled = true;
+             // focus on username  field
+            var username = document.querySelector('#name');
+            if (username) {
+                username.focus();
             }
-
             // cleanup password field
             var password = document.querySelector('#password');
             if (password) {
                 //console.log(password);
                 password.value = "";
             }
+         
+            // block login button fo 3 seconds
+            var loginButton = document.querySelector('#loginButton');
             if (loginButton) {
+                loginButton.disabled = true;
+            }
+
+               if (loginButton) {
                 this.async(
                     function() {
                         var loginButton = this.$.loginButton;

@@ -1,7 +1,7 @@
 {
     "_help_": "Toggle underscore from params, and change their value to force them",
     "api": {
-        "address": "fritz.bestmazzo.it", 
+        "address": "demo.freedomotic.com", 
         "_port": "9111",
         "_path": "v3",
         "_ssl": false

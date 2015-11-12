@@ -1,6 +1,6 @@
 {
   "name": "freedomotic-polymer-webapp",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "dependencies": {
     "core-elements": "Polymer/core-elements#^0.5.5",
     "paper-elements": "Polymer/paper-elements#^0.5.5",
@@ -21,14 +21,11 @@
   },
   "devDependencies": {},
   "resolutions": {
-    "fd-polymer-ispermitted": "^0.2.0",
-    "fd-polymer-ws-service": "~0.2.0",
-    "fd-polymer-api-settings": "^0.2.3",
     "polymer": "^0.5.0",
     "core-ajax": "~0.5.2",
     "core-shared-lib": "^0.5",
-    "core-component-page": "^0.5",
-    "platform": "^0.4.0",
-    "webcomponentsjs": "^0.6.0"
+    "platform": "~0.3.1",
+    "webcomponentsjs": "^0.6.0",
+    "core-component-page": "^0.5"
   }
 }

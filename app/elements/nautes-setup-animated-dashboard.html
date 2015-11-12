@@ -46,7 +46,7 @@
             }
         </style>
 
-        <flatiron-director route="{{selected}}" autoHash on-director-route="{{routeChanged}}">
+     <!--   <flatiron-director route="{{selected}}" autoHash on-director-route="{{routeChanged}}"> -->
         </flatiron-director>
         <fd-api-settings webappConfig="{{webappConfig}}"></fd-api-settings>
         <paper-toast id="toast" text="There was a problem loading data.">
@@ -132,6 +132,9 @@
             back: function(event, detail, sender) {
                 this.selected = "dashboard";
                 this.selectedBox = null;
+            },
+            routeChanged: function(){
+                
             }
         });
     </script>
