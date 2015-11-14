@@ -73,7 +73,7 @@
             </div>
         </template>
         <core-ajax id="config" auto url="./config.json" handleAs="json" on-core-response="{{configChanged}}" ></core-ajax>
-
+        
         <fd-api-settings address="{{address}}" apiVersion="{{path}}" ssl="{{ssl}}" port="{{port}}" apiUrl="{{apiUrl}}" noSave="false" webappConfig="{{config.webapp}}"></fd-api-settings>
         <fd-rest-service id="reLogin" fdType="system/info/framework" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}"></fd-rest-service>
 
@@ -81,7 +81,7 @@
             <fd-rest-service id="doLogin" auto="false" method="POST" contentType="application/x-www-form-urlencoded" fdType="users/_/login" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}" apiUrl="{{apiUrl}}"></fd-rest-service>
             <core-media-query query="max-width: 480px" queryMatches="{{smallScreen}}"></core-media-query>
             <template if="{{!smallScreen}}">
-                <core-image class="background" src="images/backgrounds/{{background}}" sizing="cover" preload fade></core-image>
+                <core-image class="background" src="{{background}}" sizing="cover" preload fade></core-image>
                 <div layout horizontal center class="container">
                     <paper-shadow z="5" class="login" layout vertical center self-center>
                         <template ref="loginContent" bind></template>
@@ -96,18 +96,13 @@
             <nautes-pass-dashboard background="{{background}}" on-logout="{{backToLogin}}"></nautes-pass-dashboard>
 
         </template>
-
+        <a href="http://goo.gl/forms/CqZZfBCHNx" target="_blank"><paper-button raised id="feedback"><core-icon icon="bug-report"></core-icon> Bugs?</paper-button></a>
     </template>
     <script type="text/javascript">
         var scope = document.querySelector('template[is=auto-binding]');
         scope.preInit = true;
         scope.successLogin = false;
-        scope.backgrounds = ["104792456_71001aaea2_o.jpg", "15171955576_e0b30e8946_k.jpg", "472387994_4da97c2407_o.jpg",
-            "5031124094_01d0a88fde_o.jpg", "8505463101_01086d86d7_k.jpg", "13983804179_a5b92250d3_o.jpg",
-            "4517193518_c8cebf5f2e_o.jpg", "4911433144_e6b761b3f9_b.jpg", "5577311905_0261db95bd_o.jpg",
-            "9712013330_547dd0fd9e_k.jpg"
-        ];
-        scope.background = scope.backgrounds[Math.floor((Math.random() * 10))];
+        
         scope.backToLogin = function(e) {
             // console.log("BACK TO LOGIN", e);
             scope.preInit= false;
@@ -199,7 +194,7 @@
             scope.port = (!!scope.config.api.port) ? scope.config.api.port : scope.port;
             scope.path = (!!scope.config.api.path) ? scope.config.api.path : scope.path;
             scope.ssl = (scope.config.api.ssl != undefined) ? scope.config.api.ssl : scope.ssl;
-            
+            scope.background = scope.config.backgrounds[Math.floor((Math.random() * scope.config.backgrounds.length))];
         };
         document.addEventListener('rest-error', function(e) {
             // console.log("ERROR ON A REST CALL", e);

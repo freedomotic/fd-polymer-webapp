@@ -52,3 +52,12 @@ paper-icon-button .thing{
  	-moz-transition-property: top, left;
  	-moz-transition-duration: 2s;
 }
+
+#feedback{
+	position:  absolute;
+	top: 0px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	background: rgba(80,80,80,0.7);
+	color: #fafafa;
+}

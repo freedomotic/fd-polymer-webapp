@@ -96,9 +96,9 @@
         top: 10px;
         left: 10px;
       }
-    </style>
+    </style> 
     <template if="{{background}}">
-      <core-image class="background" src="images/backgrounds/{{background}}" sizing="cover" preload fade></core-image>
+      <core-image class="background" src="{{background}}" sizing="cover" preload fade></core-image>
     </template>
     <div fit>
       <fd-generic-ws type="messagecallout" id="toastws" on-message="{{updateToast}}" auto="true"></fd-generic-ws>
