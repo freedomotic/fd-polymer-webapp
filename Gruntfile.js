@@ -22,7 +22,7 @@ module.exports = function (grunt) {
         app: 'app',
         dist: 'dist'
     };
-
+    grunt.loadNpmTasks('grunt-vulcanize');
     grunt.initConfig({
         yeoman: yeomanConfig,
         watch: {
@@ -138,15 +138,15 @@ module.exports = function (grunt) {
         htmlmin: {
             dist: {
                 options: {
-                    /*removeCommentsFromCDATA: true,
+                    removeCommentsFromCDATA: true,
                     // https://github.com/yeoman/grunt-usemin/issues/44
-                    //collapseWhitespace: true,
+                    collapseWhitespace: true,
                     collapseBooleanAttributes: true,
-                    removeAttributeQuotes: true,
+                    // removeAttributeQuotes: true,
                     removeRedundantAttributes: true,
                     useShortDoctype: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true*/
+                    // removeEmptyAttributes: true,
+                    // removeOptionalTags: true
                 },
                 files: [{
                     expand: true,
@@ -158,7 +158,11 @@ module.exports = function (grunt) {
         },
         vulcanize: {
            default: {
-                    options: {},
+                    options: {
+		        inlineScripts: true,
+		        inlineCss: true,
+		        stripComments: true
+			},
                     files: {
                         '<%= yeoman.dist %>/index.html': ['<%= yeoman.app %>/index.html'],
                     }
@@ -174,8 +178,6 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,txt}',
                         '.htaccess',
-                        'elements/**',
-                        'bower_components/**',
                         'api/**',
                         'config.json'
                     ]
@@ -223,20 +225,20 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'useminPrepare',
-        'concat',
+//       'useminPrepare',
+//        'concat',
         'imagemin',
-        'htmlmin',
-        'cssmin',
-        'uglify',
+//        'htmlmin',
+//        'cssmin',
+//        'uglify',
         'copy',
-        //'vulcanize',
-        'usemin'
+        'vulcanize',
+//        'usemin'
     ]);
 
     grunt.registerTask('default', [
         'jshint',
-        // 'test'
+        // 'test',
         'build'
     ]);
 };

@@ -77,7 +77,7 @@
         <fd-api-settings address="{{address}}" apiVersion="{{path}}" ssl="{{ssl}}" port="{{port}}" apiUrl="{{apiUrl}}" noSave="false" webappConfig="{{config.webapp}}"></fd-api-settings>
         <fd-rest-service id="reLogin" fdType="system/info/framework" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}"></fd-rest-service>
 
-        <template if="{{!successLogin && !preInit}}">
+        <template if="{{!successLogin }}">
             <fd-rest-service id="doLogin" auto="false" method="POST" contentType="application/x-www-form-urlencoded" fdType="users/_/login" on-rest-error="{{backToLogin}}" on-rest-response="{{gotoApp}}" apiUrl="{{apiUrl}}"></fd-rest-service>
             <core-media-query query="max-width: 480px" queryMatches="{{smallScreen}}"></core-media-query>
             <template if="{{!smallScreen}}">
