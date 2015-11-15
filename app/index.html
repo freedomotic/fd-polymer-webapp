@@ -38,7 +38,7 @@
                 <core-image class="logo" src="images/freedomotic-logo-light-transparent.png" sizing="contain" preload fade></core-image>
             </div>
             <div layout vertical self-stretch end-justified style="padding:1em 2em;">
-                <template if="{{!config.address}}">
+                <template if="{{!config.api.address}}">
                     <paper-input-decorator id="addressInput" label="{{'address' | t}}" floatingLabel error="Invalid Address">
                         <input is="core-input" id="address" value="{{address}}" />
                     </paper-input-decorator>
@@ -48,7 +48,7 @@
                 <paper-input-decorator id="passwordInput" label="{{'password' | t}}" floatingLabel error="{{'incorrect_login_msg' | t }}">
                     <input id="password" is="core-input" value="{{password}}" name="password" type="password" />
                 </paper-input-decorator>
-                <template if="{{config.ssl == undefined}}">
+                <template if="{{config.api.ssl == undefined}}">
                     <core-label center horizontal layout style="margin:1em;">
                         <div flex>SSL</div>&nbsp;
                         <paper-checkbox checked="{{ssl}}" for></paper-checkbox>
@@ -58,14 +58,14 @@
                     <div flex>Remember me</div>&nbsp;
                     <paper-checkbox id="rememberMe" checked="{{rememberMe}}" for></paper-checkbox>
                 </core-label>
-                <template if="{{!config.port || !config.path}}">
+                <template if="{{!config.api.port || !config.api.path}}">
                     <small style="margin:1em;" on-tap="{{toggleHideAdvanced}}">Show advanced options</small>
                 </template>
                 <template if="{{!hideAdvanced}}">
                     <template if="{{!config.port}}">
                         <paper-input label="Port" id="port" value="{{port}}" floatingLabel></paper-input>
                     </template>
-                    <template if="{{!config.path}}">
+                    <template if="{{!config.api.path}}">
                         <paper-input label="Path" id="path" value="{{path}}" floatingLabel></paper-input>
                     </template>
                 </template>

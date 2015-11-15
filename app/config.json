@@ -1,7 +1,8 @@
 {
-    "_help_": "Toggle underscore from params, and change their value to force them",
+    "_help_": "Toggle underscore from params, and change their value to force them. ",
     "api": {
-        "address": "demo.freedomotic.com", 
+        "_address_usage": "Set to $location.hostname$ when running from FD's webserver plugin", 
+        "_address": "demo.freedomotic.com", 
         "_port": "9111",
         "_path": "v3",
         "_ssl": false

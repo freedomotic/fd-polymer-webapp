@@ -228,7 +228,7 @@ module.exports = function (grunt) {
         'imagemin',
         'htmlmin',
         'cssmin',
-        // 'uglify',
+        'uglify',
         'copy',
         //'vulcanize',
         'usemin'
