@@ -6,15 +6,9 @@ This is a simple frontend web application that interacts with a Freedomotic 5.6.
 ---
 You can access a live preview at: 
 
-http://demo.freedomotic.com/
+http://freedomotic.bestmazzo.it:8090/
 
 * Login Params
-
-Address:
-
-a) api.freedomotic.com
-
-b) fritz.bestmazzo.it
 
 User | Pass | 
 --- | --- | 
@@ -22,8 +16,6 @@ User | Pass |
 `admin` | `admin` | 
 
 * In login panel, insert following params:
-
-Address: (see above)
 
 Username: (see above)
 
